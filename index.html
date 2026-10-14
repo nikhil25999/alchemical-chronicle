@@ -1,0 +1,3587 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#130510" id="metaThemeColor" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Well Chronicle" />
+  <title>OPUS MCMLXXIV — The Alchemical Habit Chronicle (Well + GitHub Sovereign Sync)</title>
+  <!-- Dynamic Web App Manifest injected at runtime -->
+  <link rel="manifest" id="dynamicManifestLink" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Times New Roman"', 'Times', 'Georgia', 'serif'],
+            sans: ['"Times New Roman"', 'Times', 'Georgia', 'serif'],
+            mono: ['"Times New Roman"', 'Times', 'Georgia', 'serif'],
+            display: ['"Times New Roman"', 'Times', 'Georgia', 'serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      /* Light Theme: 1971 Whole Earth Parchment & Royal Claret */
+      --bg-canvas: #F6EFE2;
+      --bg-canvas-deep: #EDE1CD;
+      --bg-glass: rgba(255, 250, 240, 0.85);
+      --bg-glass-elevated: rgba(247, 237, 220, 0.96);
+      --bg-glass-subtle: rgba(104, 24, 66, 0.055);
+      --bg-cell-empty: rgba(92, 22, 58, 0.045);
+      --text-primary: #2B0920;
+      --text-secondary: #63324C;
+      --text-muted: #8E6274;
+      --gold-primary: #B8860B;
+      --gold-bright: #D4941C;
+      --gold-soft: #9A6B1F;
+      --wine-accent: #5E123E;
+      --border-specular: rgba(184, 134, 11, 0.32);
+      --border-hairline: rgba(110, 35, 72, 0.16);
+      --shadow-ambient: 0 20px 50px -12px rgba(58, 10, 38, 0.14), inset 0 1px 0 0 rgba(255, 255, 255, 0.78);
+      --chart-grid: rgba(110, 35, 72, 0.14);
+      --aurora-1: rgba(136, 28, 84, 0.11);
+      --aurora-2: rgba(218, 165, 32, 0.15);
+      --aurora-3: rgba(102, 18, 60, 0.09);
+    }
+
+    html.dark {
+      /* Dark Theme (Default): 1974 Velvet Bordeaux & Burnished 24k Gold iOS Glass */
+      --bg-canvas: #130510;
+      --bg-canvas-deep: #1E0819;
+      --bg-glass: rgba(38, 11, 31, 0.76);
+      --bg-glass-elevated: rgba(48, 13, 39, 0.94);
+      --bg-glass-subtle: rgba(242, 201, 76, 0.06);
+      --bg-cell-empty: rgba(250, 241, 226, 0.035);
+      --text-primary: #FAF1E2;
+      --text-secondary: #D5B88B;
+      --text-muted: #9D7A64;
+      --gold-primary: #F2C94C;
+      --gold-bright: #FFE27A;
+      --gold-soft: #C89D3C;
+      --wine-accent: #4A1238;
+      --border-specular: rgba(242, 201, 76, 0.24);
+      --border-hairline: rgba(242, 201, 76, 0.14);
+      --shadow-ambient: 0 24px 60px -12px rgba(5, 1, 4, 0.76), inset 0 1px 0 0 rgba(255, 228, 158, 0.22);
+      --chart-grid: rgba(242, 201, 76, 0.13);
+      --aurora-1: rgba(74, 18, 56, 0.55);
+      --aurora-2: rgba(242, 201, 76, 0.16);
+      --aurora-3: rgba(98, 18, 68, 0.42);
+    }
+
+    /* Enforce Times New Roman universally */
+    *, *::before, *::after {
+      font-family: 'Times New Roman', Times, Georgia, serif !important;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      transition: background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s ease;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    @keyframes auroraFloat {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(2%, -2.5%, 0) scale(1.06); }
+    }
+
+    @keyframes filamentPulse {
+      0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(242, 201, 76, 0.55));
+        opacity: 0.92;
+      }
+      50% {
+        filter: drop-shadow(0 0 18px rgba(255, 226, 122, 0.98));
+        opacity: 1;
+      }
+    }
+
+    @keyframes springCheck {
+      0% { transform: scale(0.75) rotate(-6deg); }
+      55% { transform: scale(1.13) rotate(2deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes sanctuaryShimmer {
+      0% { box-shadow: 0 0 0 0 rgba(223, 192, 122, 0.55); }
+      70% { box-shadow: 0 0 0 10px rgba(223, 192, 122, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(223, 192, 122, 0); }
+    }
+
+    @keyframes syncSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .animate-spring-check {
+      animation: springCheck 0.36s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    .animate-sanctuary {
+      animation: sanctuaryShimmer 0.65s ease-out;
+    }
+
+    .animate-sync-spin {
+      animation: syncSpin 1.1s linear infinite;
+    }
+
+    .ios-wine-glass {
+      background: var(--bg-glass);
+      backdrop-filter: blur(28px) saturate(170%);
+      -webkit-backdrop-filter: blur(28px) saturate(170%);
+      border: 1px solid var(--border-specular);
+      box-shadow: var(--shadow-ambient);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.28s ease, box-shadow 0.28s ease, background-color 0.35s ease;
+    }
+
+    .ios-wine-glass-elevated {
+      background: var(--bg-glass-elevated);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border: 1px solid var(--border-specular);
+      box-shadow: var(--shadow-ambient);
+    }
+
+    .ios-pill-btn {
+      background: var(--bg-glass-subtle);
+      border: 1px solid var(--border-specular);
+      color: var(--text-primary);
+      transition: all 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: inset 0 1px 0 0 rgba(255, 228, 158, 0.16);
+    }
+
+    .ios-pill-btn:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px -4px rgba(242, 201, 76, 0.22), inset 0 1px 0 0 rgba(255, 228, 158, 0.32);
+    }
+
+    .ios-pill-btn:active {
+      transform: scale(0.97);
+    }
+
+    .ios-gold-cta {
+      background: linear-gradient(135deg, #F6D365 0%, #D4941C 52%, #B37212 100%);
+      color: #1A0515;
+      border: 1px solid rgba(255, 242, 198, 0.65);
+      box-shadow: 0 10px 25px -6px rgba(242, 201, 76, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.65);
+      transition: all 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ios-gold-cta:hover {
+      filter: brightness(1.07);
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px -6px rgba(242, 201, 76, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .ios-gold-cta:active {
+      transform: scale(0.97);
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF2CC 0%, #F2C94C 48%, #D89B2B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    html:not(.dark) .gold-gradient-text {
+      background: linear-gradient(135deg, #2B0920 0%, #8B5A00 55%, #B8860B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tabular-nums {
+      font-variant-numeric: tabular-nums lining-nums;
+    }
+
+    .editorial-double-rule {
+      border-top: 1px solid var(--border-specular);
+      border-bottom: 1px solid var(--border-hairline);
+      height: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(242, 201, 76, 0.3);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(242, 201, 76, 0.55);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen antialiased selection:bg-[#F2C94C] selection:text-[#1D0717]">
+
+  <!-- LIVING AMBIENT AURORA BACKDROP (Steve Jobs iOS Depth + 1970s Warm Backlit Glow) -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+    <div class="absolute -top-36 -left-28 w-[540px] h-[540px] rounded-full blur-[120px]"
+         style="background: radial-gradient(circle, var(--aurora-1) 0%, transparent 70%); animation: auroraFloat 16s ease-in-out infinite;"></div>
+    <div class="absolute top-1/4 -right-32 w-[500px] h-[500px] rounded-full blur-[130px]"
+         style="background: radial-gradient(circle, var(--aurora-2) 0%, transparent 70%); animation: auroraFloat 20s ease-in-out infinite reverse;"></div>
+    <div class="absolute -bottom-40 left-1/3 w-[620px] h-[620px] rounded-full blur-[140px]"
+         style="background: radial-gradient(circle, var(--aurora-3) 0%, transparent 70%); animation: auroraFloat 18s ease-in-out infinite;"></div>
+  </div>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <div class="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-6">
+
+    <!-- ONE-CLICK PERMISSION RE-VERIFICATION BANNER (Shown when IndexedDB has a stored Well folder file handle requiring browser gesture) -->
+    <div id="wellPermissionBanner" class="hidden ios-wine-glass-elevated rounded-2xl px-5 py-3.5 border border-[#F2C94C]/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold shrink-0"
+              style="background: rgba(242, 201, 76, 0.2); color: var(--gold-primary); border: 1px solid var(--border-specular);">✦</span>
+        <div>
+          <div class="text-sm font-bold" style="color: var(--text-primary);">
+            Verify Local “Well” Folder Access (<span id="pendingHandleFileName" class="italic text-[#FFE27A]">chronicle-ledger.json</span>)
+          </div>
+          <p class="text-xs italic" style="color: var(--text-secondary);">
+            Your browser remembers your bound “Well” folder file handle across restarts. Tap once to resume automatic disk streaming.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="verifyWellHandleBtn" type="button" class="ios-gold-cta px-4 py-1.5 rounded-xl text-xs font-bold">
+          Verify Well File Access
+        </button>
+        <button id="dismissWellBannerBtn" type="button" class="ios-pill-btn px-3 py-1.5 rounded-xl text-xs">
+          Later
+        </button>
+      </div>
+    </div>
+
+    <header class="ios-wine-glass rounded-3xl p-5 sm:p-6 space-y-4">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <!-- Left: Emblem & Whole Earth Editorial Title -->
+        <div class="flex items-start sm:items-center gap-4">
+          <!-- Burnished 24k Gold Sunburst & Compass Emblem -->
+          <div class="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 relative overflow-hidden"
+               style="background: linear-gradient(145deg, #3D0D2F 0%, #1F0618 100%); border: 1px solid rgba(242, 201, 76, 0.55); box-shadow: 0 10px 25px -5px rgba(242, 201, 76, 0.25), inset 0 1px 0 0 rgba(255, 232, 163, 0.4);">
+            <svg class="w-8 h-8 text-[#F2C94C]" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6">
+              <circle cx="16" cy="16" r="6.5" />
+              <circle cx="16" cy="16" r="12" stroke-dasharray="2 2.5" opacity="0.75" />
+              <path stroke-linecap="round" d="M16 2v4M16 26v4M2 16h4M26 16h4M6.1 6.1l2.8 2.8M23.1 23.1l2.8 2.8M25.9 6.1l-2.8 2.8M8.9 23.1l-2.8 2.8" />
+              <circle cx="16" cy="16" r="2" fill="currentColor" />
+            </svg>
+          </div>
+
+          <div class="space-y-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.22em] font-bold px-2.5 py-0.5 rounded-full"
+                    style="background: rgba(242, 201, 76, 0.14); color: var(--gold-primary); border: 1px solid var(--border-specular);">
+                Opus MCMLXXIV • Sovereign Telemetry
+              </span>
+              <span id="weekRangeBadge" class="text-xs italic px-2.5 py-0.5 rounded-full"
+                    style="color: var(--text-secondary); border: 1px solid var(--border-hairline);">
+                Oct 12 – Oct 18, 2026
+              </span>
+              <!-- Live Sync Status Pill -->
+              <button id="headerSyncStatusPill" type="button"
+                      class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-xs font-bold transition hover:brightness-110"
+                      style="background: rgba(242, 201, 76, 0.12); color: var(--gold-primary); border: 1px solid var(--border-specular);"
+                      title="Click to configure Local Well Folder & GitHub Cloud Sync">
+                <span id="syncStatusDot" class="w-2 h-2 rounded-full bg-[#D5B88B]"></span>
+                <span id="syncStatusText">Local Cache Only</span>
+              </button>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-none gold-gradient-text">
+              The Alchemical Habit Chronicle
+            </h1>
+
+            <p class="text-xs sm:text-sm italic" style="color: var(--text-secondary);">
+              “Access to Daily Tools” — Dual-Engine Sovereign Sync across your <span class="font-bold not-italic" style="color: var(--gold-primary);">“Well”</span> Folder &amp; GitHub Cloud
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Tactile iOS Controls -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <!-- Quick Sync Now Button -->
+          <button id="quickSyncNowBtn" type="button"
+            class="ios-pill-btn inline-flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-bold"
+            title="Synchronize and merge immediately with bound Well folder file and GitHub Cloud">
+            <svg id="quickSyncIcon" class="w-3.5 h-3.5 text-[#F2C94C]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span id="quickSyncLabel">Sync Now</span>
+          </button>
+
+          <!-- Sync & PWA Vault Modal Trigger -->
+          <button id="openSyncVaultBtn" type="button"
+            class="ios-pill-btn inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold"
+            style="border-color: rgba(242, 201, 76, 0.55); background: rgba(242, 201, 76, 0.12);"
+            title="Open Dual-Engine Well Folder + GitHub Cloud Sync & PWA Vault">
+            <svg class="w-4 h-4 text-[#FFE27A]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.9">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+            </svg>
+            <span>Sync &amp; PWA Vault</span>
+          </button>
+
+          <!-- Acoustic Tactile Sound Toggle -->
+          <button id="soundToggleBtn" type="button"
+            class="ios-pill-btn inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl text-xs font-semibold"
+            title="Toggle analog Web Audio tactile clicks and harmonic chimes">
+            <svg id="soundOnIcon" class="w-4 h-4 text-[#F2C94C]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+            <svg id="soundOffIcon" class="w-4 h-4 text-[#9D7A64] hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            </svg>
+            <span id="soundToggleLabel">Acoustics: On</span>
+          </button>
+
+          <!-- Clear Week Checks Button -->
+          <button id="clearWeekBtn" type="button"
+            class="ios-pill-btn inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl text-xs font-semibold"
+            title="Clear all checkmarks to begin logging a fresh week">
+            <svg class="w-3.5 h-3.5 text-[#D5B88B]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <span>Clear Checks</span>
+          </button>
+
+          <!-- Theme Switcher: Velvet Bordeaux vs. Whole Earth Parchment -->
+          <button id="themeToggleBtn" type="button"
+            class="ios-pill-btn inline-flex items-center gap-1.5 px-3 py-2 rounded-2xl text-xs font-semibold"
+            aria-label="Toggle color atmosphere">
+            <svg id="sunIcon" class="w-4 h-4 text-[#F2C94C] hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg id="moonIcon" class="w-4 h-4 text-[#5E123E] block dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <span id="themeToggleLabel">Parchment Light</span>
+          </button>
+
+          <!-- Primary CTA: Inscribe New Vow -->
+          <button id="openAddHabitBtn" type="button"
+            class="ios-gold-cta inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold tracking-wide">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.3">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            <span>New Vow</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pt-3 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 text-xs"
+           style="border-color: var(--border-hairline); color: var(--text-secondary);">
+        <div class="flex items-center gap-3 flex-wrap">
+          <label for="headerDeviceSelect" class="inline-flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px]" style="color: var(--gold-primary);">
+            <span>Active Node:</span>
+          </label>
+          <select id="headerDeviceSelect"
+                  class="px-2.5 py-1 rounded-xl text-xs font-bold focus:outline-none cursor-pointer"
+                  style="background: rgba(19, 5, 16, 0.45); color: var(--text-primary); border: 1px solid var(--border-specular);">
+            <option value="Samsung Phone">Samsung Phone (DriveSync Pro)</option>
+            <option value="Samsung Tablet">Samsung Tablet (DriveSync Pro)</option>
+            <option value="Lenovo Laptop">Lenovo Laptop (Google Drive Desktop)</option>
+            <option value="ASUS Laptop">ASUS Laptop (Google Drive Desktop)</option>
+          </select>
+          <span id="boundFileStatusBadge" class="italic text-xs" style="color: var(--text-muted);">
+            Well Folder: Unbound (Click “Sync &amp; PWA Vault” to bind chronicle-ledger.json)
+          </span>
+        </div>
+
+        <div class="flex items-center gap-3 flex-wrap">
+          <span id="lastSyncTimestampLabel" class="italic tabular-nums" style="color: var(--text-muted);">
+            CRDT-Lite Cell Timestamps Active
+          </span>
+          <button id="resetDemoBtn" type="button" class="underline hover:text-[#FFE27A] font-semibold text-[11px]"
+                  style="color: var(--text-secondary);"
+                  title="Restore default 6 habits and sample weekly streak">
+            Restore Default VI Vows
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section aria-label="Thomas Edison Philosophical Manifesto"
+             class="ios-wine-glass rounded-3xl p-5 sm:p-7 relative overflow-hidden">
+      <div id="edisonRadialGlow"
+           class="absolute -right-16 -top-16 w-72 h-72 rounded-full pointer-events-none transition-opacity duration-700"
+           style="background: radial-gradient(circle, rgba(242, 201, 76, 0.24) 0%, transparent 70%); opacity: 0.85;"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <!-- Left 8 Cols: The Edison Quote in Classical Times New Roman Editorial Style -->
+        <div class="lg:col-span-8 space-y-2.5">
+          <div class="flex items-center gap-2.5">
+            <span class="text-[10px] uppercase tracking-[0.24em] font-bold" style="color: var(--gold-primary);">
+              ✦ The Incandescent Manifesto • Menlo Park Credo
+            </span>
+          </div>
+
+          <blockquote class="text-xl sm:text-2xl md:text-[27px] leading-snug font-normal italic tracking-tight"
+                      style="color: var(--text-primary);">
+            “If we did all the things we are capable of, we would literally <span class="font-bold not-italic underline decoration-[#F2C94C]/60 decoration-1 underline-offset-4 gold-gradient-text">astound ourselves</span>.”
+          </blockquote>
+
+          <div class="flex items-center gap-3 pt-1">
+            <span class="h-[1px] w-8 inline-block" style="background-color: var(--gold-primary);"></span>
+            <cite class="not-italic text-xs sm:text-sm font-bold uppercase tracking-[0.18em]" style="color: var(--text-secondary);">
+              Thomas Alva Edison
+            </cite>
+            <span class="text-xs italic" style="color: var(--text-muted);">
+              — On Latent Human Potential &amp; Daily Craft
+            </span>
+          </div>
+        </div>
+
+        <!-- Right 4 Cols: Interactive Incandescent Filament Gauge -->
+        <div class="lg:col-span-4 rounded-2xl p-4 sm:p-5 border"
+             style="background: rgba(19, 5, 16, 0.42); border-color: var(--border-specular);">
+          <div class="flex items-center justify-between gap-3 mb-2.5">
+            <div class="flex items-center gap-2.5">
+              <div id="edisonBulbIcon" class="w-9 h-9 rounded-xl flex items-center justify-center border"
+                   style="background: rgba(242, 201, 76, 0.14); border-color: rgba(242, 201, 76, 0.45); animation: filamentPulse 3s infinite ease-in-out;">
+                <svg class="w-5 h-5 text-[#FFE27A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+              </div>
+              <div>
+                <div class="text-[10px] uppercase tracking-[0.18em] font-bold" style="color: var(--text-secondary);">
+                  Capability Filament
+                </div>
+                <div id="filamentStateTitle" class="text-sm font-bold italic" style="color: #FFE27A;">
+                  Astounding Capability (100%)
+                </div>
+              </div>
+            </div>
+
+            <span id="filamentLuminosityPct" class="text-xl font-bold tabular-nums gold-gradient-text">
+              100%
+            </span>
+          </div>
+
+          <div class="w-full h-2.5 rounded-full overflow-hidden p-0.5"
+               style="background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(242, 201, 76, 0.25);">
+            <div id="filamentProgressBar"
+                 class="h-full rounded-full transition-all duration-500 ease-out"
+                 style="width: 100%; background: linear-gradient(90deg, #9E3B68 0%, #E8923A 45%, #F2C94C 80%, #FFF3B0 100%); box-shadow: 0 0 12px rgba(242, 201, 76, 0.8);"></div>
+          </div>
+
+          <p id="filamentSubCaption" class="text-[11px] italic mt-2" style="color: var(--text-secondary);">
+            All 6 daily vows illuminated on this day.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Key Performance Indicators" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- KPI Card I: Today's Capability Index -->
+      <div class="ios-wine-glass rounded-3xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[11px] font-bold uppercase tracking-[0.16em]" style="color: var(--text-secondary);">
+            I. Today’s Capability Index
+          </span>
+          <span id="kpiTodayDayLabel"
+                class="px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase tabular-nums"
+                style="background: rgba(242, 201, 76, 0.15); color: var(--gold-primary); border: 1px solid var(--border-specular);">
+            WED · OCT 14
+          </span>
+        </div>
+
+        <div class="my-3.5 flex items-baseline justify-between">
+          <div class="flex items-baseline gap-2.5">
+            <span id="kpiTodayRatio" class="font-bold text-4xl tracking-tight tabular-nums gold-gradient-text">
+              6/6
+            </span>
+            <span id="kpiTodayPercent" class="text-sm font-bold italic tabular-nums" style="color: var(--gold-primary);">
+              100%
+            </span>
+          </div>
+          <span id="kpiTodayFreezeNote" class="text-xs italic hidden" style="color: #DFC07A;">
+            1 Freeze ❄
+          </span>
+        </div>
+
+        <div>
+          <div class="w-full h-2 rounded-full overflow-hidden" style="background: rgba(242, 201, 76, 0.12);">
+            <div id="kpiTodayBar"
+                 class="h-full rounded-full transition-all duration-500 ease-out"
+                 style="width: 100%; background: linear-gradient(90deg, #C85A7C 0%, #E8923A 50%, #F2C94C 100%);"></div>
+          </div>
+          <p id="kpiTodaySubtext" class="text-xs italic mt-2" style="color: var(--text-secondary);">
+            Every vow fulfilled with precision
+          </p>
+        </div>
+      </div>
+
+      <!-- KPI Card II: Active Sovereign Streak -->
+      <div class="ios-wine-glass rounded-3xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[11px] font-bold uppercase tracking-[0.16em]" style="color: var(--text-secondary);">
+            II. Active Sovereign Streak
+          </span>
+          <span id="kpiStreakStatusPill"
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold italic"
+                style="background: rgba(242, 201, 76, 0.15); color: var(--gold-primary); border: 1px solid var(--border-specular);">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#F2C94C] animate-pulse"></span>
+            Sovereign Flame
+          </span>
+        </div>
+
+        <div class="my-3.5 flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0"
+               style="background: linear-gradient(135deg, rgba(242, 201, 76, 0.2) 0%, rgba(226, 91, 120, 0.15) 100%); border: 1px solid var(--border-specular); color: var(--gold-primary);">
+            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z" />
+            </svg>
+          </div>
+          <div>
+            <div id="kpiActiveStreakValue" class="font-bold text-4xl tracking-tight tabular-nums gold-gradient-text">
+              7 Days
+            </div>
+          </div>
+        </div>
+
+        <p id="kpiActiveStreakSub" class="text-xs italic" style="color: var(--text-secondary);">
+          Consecutive days ≥70% fulfilled (Freeze shields active)
+        </p>
+      </div>
+
+      <!-- KPI Card III: Weekly Velocity Rate -->
+      <div class="ios-wine-glass rounded-3xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[11px] font-bold uppercase tracking-[0.16em]" style="color: var(--text-secondary);">
+            III. Weekly Velocity Rate
+          </span>
+          <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold italic"
+                style="background: rgba(226, 91, 120, 0.16); color: #F299B0; border: 1px solid rgba(226, 91, 120, 0.35);">
+            True Velocity
+          </span>
+        </div>
+
+        <div class="my-3.5 flex items-baseline gap-2.5">
+          <span id="kpiWeeklyRateValue" class="font-bold text-4xl tracking-tight tabular-nums gold-gradient-text">
+            98%
+          </span>
+          <span id="kpiWeeklyChecksCount" class="text-xs font-bold uppercase tracking-wider tabular-nums" style="color: var(--text-secondary);">
+            39/40 vows
+          </span>
+        </div>
+
+        <p id="kpiWeeklyRateSub" class="text-xs italic" style="color: var(--text-secondary);">
+          2 planned Freeze rest days excluded from penalty
+        </p>
+      </div>
+
+      <!-- KPI Card IV: Best Performing Vow -->
+      <div class="ios-wine-glass rounded-3xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[11px] font-bold uppercase tracking-[0.16em]" style="color: var(--text-secondary);">
+            IV. Best Performing Vow
+          </span>
+          <span id="kpiBestCategoryBadge"
+                class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                style="background: rgba(242, 201, 76, 0.16); color: #F2C94C; border: 1px solid rgba(242, 201, 76, 0.35);">
+            Health &amp; Diet
+          </span>
+        </div>
+
+        <div class="my-3">
+          <div class="flex items-center gap-2">
+            <span id="kpiBestColorDot" class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: #F2C94C;"></span>
+            <h2 id="kpiBestHabitName" class="font-bold text-lg leading-tight truncate" style="color: var(--text-primary);" title="Hydrate 2.5L.">
+              Hydrate 2.5L.
+            </h2>
+          </div>
+          <div class="mt-1.5">
+            <span id="kpiBestHabitMetrics" class="text-xs font-bold italic tabular-nums" style="color: var(--gold-primary);">
+              100% velocity · ✦ 7d unbroken
+            </span>
+          </div>
+        </div>
+
+        <p id="kpiBestHabitSub" class="text-xs italic" style="color: var(--text-secondary);">
+          Sovereign consistency across all seven days
+        </p>
+      </div>
+    </section>
+
+    <section id="addHabitDrawer" class="hidden ios-wine-glass-elevated rounded-3xl p-6 transition-all">
+      <div class="flex items-center justify-between pb-4 mb-5 border-b" style="border-color: var(--border-hairline);">
+        <div>
+          <span class="text-[10px] uppercase tracking-[0.2em] font-bold" style="color: var(--gold-primary);">
+            Whole Earth Access to Tools
+          </span>
+          <h2 class="font-bold text-xl mt-0.5" style="color: var(--text-primary);">
+            Inscribe a New Daily Vow
+          </h2>
+          <p class="text-xs italic" style="color: var(--text-secondary);">
+            Choose a category and an alchemical gold or vintage wine hue. Automatically syncs across your “Well” folder and GitHub.
+          </p>
+        </div>
+        <button id="closeAddHabitBtn" type="button"
+                class="ios-pill-btn p-2 rounded-xl"
+                aria-label="Close drawer">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <form id="newHabitForm" class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+        <div class="md:col-span-5">
+          <label for="habitNameInput" class="block text-[11px] font-bold uppercase tracking-[0.16em] mb-1.5" style="color: var(--text-secondary);">
+            Daily Vow Description
+          </label>
+          <input id="habitNameInput" type="text" required maxlength="180"
+            placeholder="e.g., Hydrate 2.5L., Study 2-3 hours, Care for Mother..."
+            class="w-full px-4 py-2.5 rounded-2xl text-sm focus:outline-none transition"
+            style="background: rgba(19, 5, 16, 0.35); color: var(--text-primary); border: 1px solid var(--border-specular);" />
+        </div>
+
+        <div class="md:col-span-3">
+          <label for="habitCategoryInput" class="block text-[11px] font-bold uppercase tracking-[0.16em] mb-1.5" style="color: var(--text-secondary);">
+            Category Pillar
+          </label>
+          <select id="habitCategoryInput"
+            class="w-full px-4 py-2.5 rounded-2xl text-sm focus:outline-none transition"
+            style="background: rgba(28, 7, 23, 0.85); color: var(--text-primary); border: 1px solid var(--border-specular);">
+            <option value="Health & Diet">Health &amp; Diet</option>
+            <option value="Fitness">Fitness</option>
+            <option value="Study & Focus">Study &amp; Focus</option>
+            <option value="Care & Hygiene">Care &amp; Hygiene</option>
+          </select>
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-[11px] font-bold uppercase tracking-[0.16em] mb-1.5" style="color: var(--text-secondary);">
+            Alchemical Hue
+          </label>
+          <div id="colorPickerGroup" class="flex items-center gap-2 py-1">
+            <button type="button" data-color="#F2C94C" class="color-swatch w-7 h-7 rounded-full ring-2 ring-offset-2 ring-offset-[#1D0717] ring-[#FFE27A] transition transform scale-105" style="background-color: #F2C94C;" title="24k Alchemical Gold"></button>
+            <button type="button" data-color="#E8923A" class="color-swatch w-7 h-7 rounded-full opacity-75 hover:opacity-100 transition" style="background-color: #E8923A;" title="Saffron Harvest Amber"></button>
+            <button type="button" data-color="#E25B78" class="color-swatch w-7 h-7 rounded-full opacity-75 hover:opacity-100 transition" style="background-color: #E25B78;" title="Imperial Rose-Garnet"></button>
+            <button type="button" data-color="#DFC07A" class="color-swatch w-7 h-7 rounded-full opacity-75 hover:opacity-100 transition" style="background-color: #DFC07A;" title="Vintage Champagne Brass"></button>
+            <button type="button" data-color="#CF76B2" class="color-swatch w-7 h-7 rounded-full opacity-75 hover:opacity-100 transition" style="background-color: #CF76B2;" title="Velvet Amethyst Orchid"></button>
+            <button type="button" data-color="#D98A54" class="color-swatch w-7 h-7 rounded-full opacity-75 hover:opacity-100 transition" style="background-color: #D98A54;" title="Burnished Copper-Gold"></button>
+          </div>
+        </div>
+
+        <div class="md:col-span-2">
+          <button type="submit" class="ios-gold-cta w-full py-2.5 px-4 rounded-2xl text-sm font-bold">
+            Inscribe Vow
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-4 pt-3 border-t flex items-center gap-2 flex-wrap" style="border-color: var(--border-hairline);">
+        <span class="text-xs italic" style="color: var(--text-muted);">Quick Inscriptions:</span>
+        <button type="button" data-preset-name="Hydrate 2.5L." data-preset-cat="Health & Diet" data-preset-color="#F2C94C"
+          class="preset-pill ios-pill-btn text-xs px-3 py-1 rounded-xl">
+          + Hydrate 2.5L.
+        </button>
+        <button type="button" data-preset-name="Diet- No Zomato orders or Meal deviations." data-preset-cat="Health & Diet" data-preset-color="#E8923A"
+          class="preset-pill ios-pill-btn text-xs px-3 py-1 rounded-xl">
+          + No Zomato / Clean Diet
+        </button>
+        <button type="button" data-preset-name="Walking- 20 mins. or some basic exercise class on Fitelo app." data-preset-cat="Fitness" data-preset-color="#E25B78"
+          class="preset-pill ios-pill-btn text-xs px-3 py-1 rounded-xl">
+          + 20m Walk / Fitelo Class
+        </button>
+        <button type="button" data-preset-name="Study for 2-3 hours atleast everyday." data-preset-cat="Study & Focus" data-preset-color="#DFC07A"
+          class="preset-pill ios-pill-btn text-xs px-3 py-1 rounded-xl">
+          + Study 2–3 Hours
+        </button>
+      </div>
+    </section>
+
+    <section aria-label="Interactive Weekly Habit Matrix" class="ios-wine-glass rounded-3xl overflow-hidden">
+      <div class="p-5 sm:p-6 border-b flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"
+           style="border-color: var(--border-hairline);">
+        <div class="space-y-1">
+          <div class="flex items-center gap-3 flex-wrap">
+            <h2 class="font-bold text-xl sm:text-2xl tracking-tight gold-gradient-text">
+              The Seven-Day Sovereign Vow Ledger
+            </h2>
+            <span id="activeHabitCountBadge"
+                  class="px-3 py-0.5 rounded-full text-xs font-bold uppercase tracking-widest tabular-nums"
+                  style="background: rgba(242, 201, 76, 0.14); color: var(--gold-primary); border: 1px solid var(--border-specular);">
+              VI Vows Active
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm italic" style="color: var(--text-secondary);">
+            Tap any cell to log completion <span class="font-bold not-italic" style="color: var(--gold-primary);">(✓)</span>. Right-click or activate <strong>Freeze Brush (❄)</strong> to shield a planned rest day without breaking your streak. Every toggle records a millisecond CRDT timestamp.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5">
+          <div id="categoryFilterBar"
+               class="inline-flex items-center p-1 rounded-2xl overflow-x-auto max-w-full"
+               style="background: rgba(19, 5, 16, 0.45); border: 1px solid var(--border-specular);">
+            <button type="button" data-filter="ALL"
+                    class="cat-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition"
+                    style="background: linear-gradient(135deg, #F2C94C 0%, #D4941C 100%); color: #1A0515;">
+              All (VI)
+            </button>
+            <button type="button" data-filter="Health & Diet"
+                    class="cat-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold transition"
+                    style="color: var(--text-secondary);">
+              Health &amp; Diet
+            </button>
+            <button type="button" data-filter="Fitness"
+                    class="cat-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold transition"
+                    style="color: var(--text-secondary);">
+              Fitness
+            </button>
+            <button type="button" data-filter="Study & Focus"
+                    class="cat-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold transition"
+                    style="color: var(--text-secondary);">
+              Study &amp; Focus
+            </button>
+            <button type="button" data-filter="Care & Hygiene"
+                    class="cat-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold transition"
+                    style="color: var(--text-secondary);">
+              Care &amp; Hygiene
+            </button>
+          </div>
+
+          <!-- Freeze Brush Mode -->
+          <button id="freezeModeBtn" type="button"
+            class="ios-pill-btn inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl text-xs font-bold"
+            title="When active, clicking any day cell marks it as a Freeze Rest Shield (protects streak)">
+            <span class="text-sm leading-none" style="color: var(--gold-primary);">❄</span>
+            <span id="freezeModeLabel">Freeze Brush: Off</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Responsive Matrix Table -->
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[840px]">
+          <thead>
+            <tr id="gridHeaderRow" class="border-b" style="border-color: var(--border-hairline); background: rgba(19, 5, 16, 0.24);">
+              <!-- Populated dynamically via JS -->
+            </tr>
+          </thead>
+          <tbody id="habitGridBody" class="divide-y text-sm" style="border-color: var(--border-hairline);">
+            <!-- Populated dynamically via JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Matrix Footer Legend -->
+      <div class="px-5 sm:px-6 py-4 border-t flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs"
+           style="border-color: var(--border-hairline); background: rgba(19, 5, 16, 0.22); color: var(--text-secondary);">
+        <div class="flex items-center gap-5 flex-wrap">
+          <span class="inline-flex items-center gap-2">
+            <span class="w-4 h-4 rounded-md inline-flex items-center justify-center text-[#1A0515] font-bold"
+                  style="background: linear-gradient(135deg, #FFE27A 0%, #D4941C 100%);">✓</span>
+            <span>Fulfilled Vow</span>
+          </span>
+          <span class="inline-flex items-center gap-2">
+            <span class="w-4 h-4 rounded-md inline-flex items-center justify-center text-[10px] font-bold"
+                  style="background: rgba(223, 192, 122, 0.18); border: 1px solid #DFC07A; color: #FFE27A;">❄</span>
+            <span>Freeze Rest (Shields Streak)</span>
+          </span>
+          <span class="inline-flex items-center gap-2">
+            <span class="w-4 h-4 rounded-md inline-block"
+                  style="border: 1px solid var(--border-specular); background: var(--bg-cell-empty);"></span>
+            <span>Uninscribed</span>
+          </span>
+          <span class="italic hidden md:inline" style="color: var(--text-muted);">
+            • Tap any column header (MON–SUN) to inspect its Edison Filament luminosity
+          </span>
+        </div>
+
+        <button id="footerAddHabitBtn" type="button"
+          class="inline-flex items-center gap-1.5 font-bold tracking-wide hover:underline self-start sm:self-auto"
+          style="color: var(--gold-primary);">
+          <span>+ Inscribe another daily vow</span>
+        </button>
+      </div>
+    </section>
+
+    <section aria-label="Weekly Streak and Alchemical Pillar Analytics" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Left 7 Cols: Weekly Incandescent Velocity (SVG Bar + Cubic Bezier Spline) -->
+      <div class="lg:col-span-7 ios-wine-glass rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b"
+             style="border-color: var(--border-hairline);">
+          <div>
+            <div class="flex items-center gap-2.5">
+              <h2 class="font-bold text-lg sm:text-xl gold-gradient-text">
+                Weekly Incandescent Velocity
+              </h2>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest"
+                    style="background: rgba(242, 201, 76, 0.14); color: var(--gold-primary); border: 1px solid var(--border-specular);">
+                Harmonic Spline
+              </span>
+            </div>
+            <p class="text-xs italic mt-0.5" style="color: var(--text-secondary);">
+              Daily fulfillment rate (%) across Monday–Sunday with 80% Sovereign Standard line
+            </p>
+          </div>
+
+          <div class="flex items-center gap-4 text-xs">
+            <span class="inline-flex items-center gap-1.5" style="color: var(--text-secondary);">
+              <span class="w-3 h-3 rounded-sm inline-block" style="background: linear-gradient(180deg, #F2C94C 0%, #8A2452 100%);"></span>
+              <span>Daily Fulfillment</span>
+            </span>
+            <span class="inline-flex items-center gap-1.5" style="color: var(--text-secondary);">
+              <span class="w-3.5 h-0.5 inline-block" style="background: #F2C94C;"></span>
+              <span>80% Sovereign Standard</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="relative my-4 select-none">
+          <div id="velocityChartContainer" class="w-full h-[255px] sm:h-[275px]">
+            <!-- Populated dynamically via JS -->
+          </div>
+          <div id="chartTooltip"
+               class="pointer-events-none fixed z-50 hidden px-4 py-3 rounded-2xl text-xs shadow-2xl transition-opacity duration-150"
+               style="background: rgba(26, 6, 21, 0.95); color: #FAF1E2; border: 1px solid rgba(242, 201, 76, 0.5); backdrop-filter: blur(16px);">
+          </div>
+        </div>
+
+        <div id="dailySummaryStrip" class="grid grid-cols-7 gap-1.5 pt-3 border-t text-center"
+             style="border-color: var(--border-hairline);">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Right 5 Cols: Category Equilibrium (Donut + Coherent Spectrum Breakdown) -->
+      <div class="lg:col-span-5 ios-wine-glass rounded-3xl p-5 sm:p-6 flex flex-col justify-between">
+        <div class="pb-4 border-b flex items-center justify-between" style="border-color: var(--border-hairline);">
+          <div>
+            <h2 class="font-bold text-lg sm:text-xl gold-gradient-text">
+              Alchemical Pillar Equilibrium
+            </h2>
+            <p class="text-xs italic mt-0.5" style="color: var(--text-secondary);">
+              Harmony across Health &amp; Diet, Fitness, Study &amp; Focus, and Care &amp; Hygiene
+            </p>
+          </div>
+          <span id="totalCompletedPill"
+                class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider tabular-nums"
+                style="background: rgba(242, 201, 76, 0.14); color: var(--gold-primary); border: 1px solid var(--border-specular);">
+            39 Seals
+          </span>
+        </div>
+
+        <div class="my-5 flex flex-col sm:flex-row lg:flex-col xl:flex-row items-center gap-6">
+          <div id="categoryDonutContainer" class="relative w-40 h-40 shrink-0 flex items-center justify-center">
+            <!-- Rendered dynamically via JS -->
+          </div>
+
+          <div id="categoryBreakdownList" class="w-full space-y-4">
+            <!-- Rendered dynamically via JS -->
+          </div>
+        </div>
+
+        <div class="pt-3.5 border-t flex items-center justify-between text-xs" style="border-color: var(--border-hairline);">
+          <div class="flex items-center gap-2" style="color: var(--text-secondary);">
+            <span class="w-6 h-6 rounded-lg flex items-center justify-center font-bold"
+                  style="background: rgba(223, 192, 122, 0.16); border: 1px solid rgba(223, 192, 122, 0.4); color: #FFE27A;">❄</span>
+            <span class="italic">Freeze Rest Shields Consecrated</span>
+          </div>
+          <span id="freezeSummaryMetric" class="font-bold italic tabular-nums" style="color: var(--gold-primary);">
+            2 rest days shielded
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1970s WHOLE EARTH COLOPHON FOOTER -->
+    <footer class="pt-2 pb-6 text-center space-y-2">
+      <div class="editorial-double-rule max-w-md mx-auto"></div>
+      <p class="text-xs italic tracking-wide" style="color: var(--text-muted);">
+        Set in Times New Roman • Dual-Engine Sovereign Sync (“Well” Folder + GitHub Cloud) • Stay Hungry, Stay Foolish
+      </p>
+    </footer>
+  </div>
+
+  <div id="syncVaultModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+       style="background: rgba(10, 2, 8, 0.78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);">
+    <div class="ios-wine-glass-elevated rounded-3xl max-w-4xl w-full p-5 sm:p-7 space-y-6 my-auto max-h-[92vh] overflow-y-auto custom-scrollbar">
+      <!-- Modal Header -->
+      <div class="flex items-start justify-between gap-4 pb-4 border-b" style="border-color: var(--border-hairline);">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] uppercase tracking-[0.22em] font-bold px-2.5 py-0.5 rounded-full"
+                  style="background: rgba(242, 201, 76, 0.16); color: var(--gold-primary); border: 1px solid var(--border-specular);">
+              Sovereign Sync Architecture • CRDT-Lite
+            </span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-bold mt-1 gold-gradient-text">
+            Dual-Engine “Well” Folder &amp; GitHub Cloud Vault
+          </h2>
+          <p class="text-xs sm:text-sm italic mt-0.5" style="color: var(--text-secondary);">
+            Synchronize your habit ledger across your Samsung Phone, Samsung Tablet, Lenovo Laptop, and ASUS Laptop without ever losing a single checkmark.
+          </p>
+        </div>
+        <button id="closeSyncVaultBtn" type="button" class="ios-pill-btn p-2.5 rounded-2xl shrink-0" aria-label="Close Sync Vault">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Navigation Tabs -->
+      <div class="flex items-center gap-2 flex-wrap border-b pb-3" style="border-color: var(--border-hairline);">
+        <button type="button" data-vault-tab="well"
+                class="vault-tab-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition"
+                style="background: linear-gradient(135deg, #F2C94C 0%, #D4941C 100%); color: #1A0515;">
+          I. Local “Well” Folder Bridge
+        </button>
+        <button type="button" data-vault-tab="github"
+                class="vault-tab-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition ios-pill-btn">
+          II. Instant GitHub Cloud API
+        </button>
+        <button type="button" data-vault-tab="pwa"
+                class="vault-tab-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition ios-pill-btn">
+          III. PWA Install &amp; Deployment Kit
+        </button>
+        <button type="button" data-vault-tab="log"
+                class="vault-tab-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-bold transition ios-pill-btn">
+          IV. CRDT Merge Log &amp; Inspector
+        </button>
+      </div>
+
+      <div id="vaultTabWell" class="vault-tab-panel space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          <div class="md:col-span-7 space-y-4">
+            <div class="p-4 rounded-2xl border space-y-2" style="background: rgba(19, 5, 16, 0.38); border-color: var(--border-specular);">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--gold-primary);">
+                  Engine I • Direct Disk Streaming (File System Access API)
+                </span>
+                <span id="wellEngineStatusTag" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold italic"
+                      style="background: rgba(242, 201, 76, 0.14); color: var(--text-secondary);">
+                  Unbound
+                </span>
+              </div>
+              <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+                Bind this chronicle directly to <code class="px-1.5 py-0.5 rounded bg-black/30 text-[#FFE27A]">Well/chronicle-ledger.json</code> on your Lenovo laptop, ASUS laptop, Samsung phone, or Samsung tablet. The file handle is persisted in <code class="px-1 py-0.5 rounded bg-black/30">IndexedDB</code> (`AlchemicalChronicleDB`) and automatically streams every habit check directly to disk so <strong>Google Drive for Desktop</strong> and <strong>DriveSync Pro</strong> mirror it across all your devices.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button id="bindExistingWellFileBtn" type="button"
+                      class="ios-gold-cta p-3.5 rounded-2xl text-left flex flex-col justify-between gap-1">
+                <span class="text-sm font-bold flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+                  </svg>
+                  1. Bind Existing Well/chronicle-ledger.json
+                </span>
+                <span class="text-[11px] italic opacity-90">
+                  Select an existing ledger inside your synced “Well” folder
+                </span>
+              </button>
+
+              <button id="createNewWellFileBtn" type="button"
+                      class="ios-pill-btn p-3.5 rounded-2xl text-left flex flex-col justify-between gap-1">
+                <span class="text-sm font-bold flex items-center gap-2" style="color: var(--gold-primary);">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                  2. Create New Well/chronicle-ledger.json
+                </span>
+                <span class="text-[11px] italic" style="color: var(--text-secondary);">
+                  Initialize a fresh ledger file inside your “Well” folder
+                </span>
+              </button>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5 pt-1">
+              <button id="readMergeWellFileBtn" type="button" class="ios-pill-btn px-3.5 py-2 rounded-xl text-xs font-bold">
+                ↻ Pull &amp; CRDT-Merge from Bound Well File
+              </button>
+              <button id="writeWellFileNowBtn" type="button" class="ios-pill-btn px-3.5 py-2 rounded-xl text-xs font-bold">
+                ↑ Force Write to Bound Well File
+              </button>
+              <button id="unbindWellFileBtn" type="button" class="ios-pill-btn px-3 py-2 rounded-xl text-xs text-[#E25B78]">
+                Unlink Handle
+              </button>
+            </div>
+          </div>
+
+          <!-- Right 5 Cols: Universal Manual Fallback & Device Identity -->
+          <div class="md:col-span-5 p-4 rounded-2xl border space-y-4 flex flex-col justify-between"
+               style="background: rgba(19, 5, 16, 0.38); border-color: var(--border-hairline);">
+            <div class="space-y-2">
+              <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--gold-primary);">
+                Universal Manual File Fallback
+              </h3>
+              <p class="text-xs italic" style="color: var(--text-secondary);">
+                If opening inside an embedded WebView where native file handles are restricted, export or import &amp; CRDT-merge <code class="text-[#FFE27A]">chronicle-ledger.json</code> manually:
+              </p>
+              <div class="grid grid-cols-1 gap-2.5 pt-2">
+                <button id="exportLedgerJsonBtn" type="button" class="ios-pill-btn py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2">
+                  <span>⬇ Export chronicle-ledger.json</span>
+                </button>
+                <label class="ios-pill-btn py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer text-center">
+                  <span>⬆ Import &amp; CRDT-Merge chronicle-ledger.json</span>
+                  <input id="importLedgerJsonInput" type="file" accept=".json,application/json" class="hidden" />
+                </label>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t text-xs space-y-1" style="border-color: var(--border-hairline); color: var(--text-muted);">
+              <div class="font-bold" style="color: var(--text-secondary);">DriveSync Pro Tip (Samsung Phone &amp; Tablet):</div>
+              <p class="italic">
+                In DriveSync Pro → Folder Pair (“Well”) → Enable <strong>“Sync on local file changes”</strong> so Android uploads immediately whenever the Chronicle writes to <code class="text-[#FFE27A]">chronicle-ledger.json</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="vaultTabGithub" class="vault-tab-panel hidden space-y-5">
+        <div class="p-4 rounded-2xl border space-y-3" style="background: rgba(19, 5, 16, 0.38); border-color: var(--border-specular);">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--gold-primary);">
+                Engine II • Zero-Latency GitHub REST API Sync (&lt;400ms)
+              </span>
+              <p class="text-xs italic mt-0.5" style="color: var(--text-secondary);">
+                Automatically pulls &amp; merges when you open/focus the app (`visibilitychange`) and pushes 600ms after any habit toggle.
+              </p>
+            </div>
+
+            <!-- Select GitHub Mode: Repo vs. Secret Gist -->
+            <div class="inline-flex p-1 rounded-xl shrink-0" style="background: rgba(19, 5, 16, 0.65); border: 1px solid var(--border-specular);">
+              <button type="button" id="ghModeRepoBtn" class="px-3 py-1 rounded-lg text-xs font-bold transition"
+                      style="background: linear-gradient(135deg, #F2C94C 0%, #D4941C 100%); color: #1A0515;">
+                Repository File Mode
+              </button>
+              <button type="button" id="ghModeGistBtn" class="px-3 py-1 rounded-lg text-xs font-bold transition"
+                      style="color: var(--text-secondary);">
+                Secret Gist Mode
+              </button>
+            </div>
+          </div>
+
+          <!-- Repository Mode Fields -->
+          <div id="ghRepoFields" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider mb-1" style="color: var(--text-secondary);">
+                GitHub Owner / Username
+              </label>
+              <input id="ghOwnerInput" type="text" placeholder="e.g., nikhil"
+                     class="w-full px-3 py-2 rounded-xl text-xs focus:outline-none"
+                     style="background: rgba(19, 5, 16, 0.55); color: var(--text-primary); border: 1px solid var(--border-specular);" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider mb-1" style="color: var(--text-secondary);">
+                Repository Name
+              </label>
+              <input id="ghRepoInput" type="text" placeholder="e.g., well-sync"
+                     class="w-full px-3 py-2 rounded-xl text-xs focus:outline-none"
+                     style="background: rgba(19, 5, 16, 0.55); color: var(--text-primary); border: 1px solid var(--border-specular);" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider mb-1" style="color: var(--text-secondary);">
+                Branch
+              </label>
+              <input id="ghBranchInput" type="text" value="main" placeholder="main"
+                     class="w-full px-3 py-2 rounded-xl text-xs focus:outline-none"
+                     style="background: rgba(19, 5, 16, 0.55); color: var(--text-primary); border: 1px solid var(--border-specular);" />
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold uppercase tracking-wider mb-1" style="color: var(--text-secondary);">
+                File Path in Repo
+              </label>
+              <input id="ghPathInput" type="text" value="Well/chronicle-ledger.json" placeholder="Well/chronicle-ledger.json"
+                     class="w-full px-3 py-2 rounded-xl text-xs focus:outline-none"
+                     style="background: rgba(19, 5, 16, 0.55); color: var(--text-primary); border: 1px solid var(--border-specular);" />
+            </div>
+          </div>
+
+          <!-- Secret Gist Mode Fields -->
+          <div id="ghGistFields" class="hidden grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2">
+            <div class="sm:col-span-8">
+              <label class="block text-[10px] font-bold uppercase tracking-wider mb-1" style="color: var(--text-secondary);">
+                Secret Gist ID (Leave blank &amp; click “Auto-Create Secret Gist” on first setup)
+              </label>
+              <input id="ghGistIdInput" type="text" placeholder="e.g., 8f3a9d2e1b4c5a6d7e8f9a0b1c2d3e4f"
+                     class="w-full px-3 py-2 rounded-xl text-xs focus:outline-none"
+                     style="background: rgba(19, 5, 16, 0.55); color: var(--text-primary); border: 1px solid var(--border-specular);" />
+            </div>
+            <div class="sm:col-span-4 flex items-end">
+              <button id="autoCreateGistBtn" type="button" class="ios-pill-btn w-full py-2 px-3 rounded-xl text-xs font-bold" style="color: var(--gold-primary);">
+                ✦ Auto-Create Secret Gist
+              </button>
+            </div>
+          </div>
+
+          <!-- Personal Access Token Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2 items-end">
+            <div class="sm:col-span-8">
+              <label class="block text-[10px] font-bold uppercase tracking-wider mb-1" style="color: var(--text-secondary);">
+                GitHub Personal Access Token (Fine-Grained <code class="text-[#FFE27A]">Contents: Read &amp; Write</code> or Classic <code class="text-[#FFE27A]">repo / gist</code>)
+              </label>
+              <input id="ghTokenInput" type="password" placeholder="github_pat_... or ghp_..."
+                     class="w-full px-3 py-2 rounded-xl text-xs focus:outline-none"
+                     style="background: rgba(19, 5, 16, 0.55); color: var(--text-primary); border: 1px solid var(--border-specular);" />
+            </div>
+            <div class="sm:col-span-4 flex items-center gap-2">
+              <button id="saveGithubConfigBtn" type="button" class="ios-gold-cta w-full py-2 px-4 rounded-xl text-xs font-bold">
+                Save &amp; Test Sync
+              </button>
+              <button id="clearGithubConfigBtn" type="button" class="ios-pill-btn py-2 px-3 rounded-xl text-xs text-[#E25B78]" title="Clear saved GitHub token">
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="flex items-center gap-2">
+            <button id="pullGithubNowBtn" type="button" class="ios-pill-btn px-3.5 py-2 rounded-xl font-bold">
+              ⬇ Pull &amp; CRDT-Merge from GitHub
+            </button>
+            <button id="pushGithubNowBtn" type="button" class="ios-pill-btn px-3.5 py-2 rounded-xl font-bold">
+              ⬆ Push Merged Ledger to GitHub
+            </button>
+          </div>
+          <span id="ghLastShaBadge" class="italic tabular-nums" style="color: var(--text-muted);">
+            Remote SHA: Not yet fetched
+          </span>
+        </div>
+      </div>
+
+      <div id="vaultTabPwa" class="vault-tab-panel hidden space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          <div class="md:col-span-6 p-4 rounded-2xl border space-y-3" style="background: rgba(19, 5, 16, 0.38); border-color: var(--border-specular);">
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--gold-primary);">
+              Download Production PWA Files
+            </h3>
+            <p class="text-xs leading-relaxed" style="color: var(--text-secondary);">
+              While this single-file app already injects a dynamic Web App Manifest, placing <code class="text-[#FFE27A]">index.html</code>, <code class="text-[#FFE27A]">manifest.json</code>, and <code class="text-[#FFE27A]">sw.js</code> together in your GitHub Pages repository unlocks true offline Cache-First loading and native full-screen installation on Android and Windows.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+              <button id="downloadManifestBtn" type="button" class="ios-gold-cta py-2.5 px-3 rounded-xl text-xs font-bold">
+                ⬇ Download manifest.json
+              </button>
+              <button id="downloadSwBtn" type="button" class="ios-pill-btn py-2.5 px-3 rounded-xl text-xs font-bold" style="color: var(--gold-primary);">
+                ⬇ Download sw.js (Offline Worker)
+              </button>
+            </div>
+            <button id="copyDeployGuideBtn" type="button" class="ios-pill-btn w-full py-2 px-3 rounded-xl text-xs font-bold mt-2">
+              📋 Copy 4-Device Setup Blueprint (Samsung + Lenovo + ASUS)
+            </button>
+          </div>
+
+          <div class="md:col-span-6 p-4 rounded-2xl border space-y-2 text-xs" style="background: rgba(19, 5, 16, 0.38); border-color: var(--border-hairline);">
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--gold-primary);">
+              4-Device Sovereign Setup Blueprint
+            </h3>
+            <ol class="list-decimal list-inside space-y-1.5 leading-relaxed" style="color: var(--text-secondary);">
+              <li><strong>GitHub Repo + Pages:</strong> Push <code class="text-[#FFE27A]">index.html</code>, <code class="text-[#FFE27A]">manifest.json</code>, and <code class="text-[#FFE27A]">sw.js</code> to a GitHub repo and enable <em>Settings → Pages</em>.</li>
+              <li><strong>Lenovo &amp; ASUS Laptops:</strong> Open your GitHub Pages URL in Edge/Chrome → click <em>Install App</em> in the address bar → open <strong>Sync &amp; PWA Vault</strong> → bind <code class="text-[#FFE27A]">Google Drive/Well/chronicle-ledger.json</code> and paste your GitHub token.</li>
+              <li><strong>Samsung Phone &amp; Tablet:</strong> Open the URL in Chrome/Samsung Internet → <em>Add to Home Screen</em> → bind <code class="text-[#FFE27A]">Well/chronicle-ledger.json</code> synced by <strong>DriveSync Pro</strong> and paste your GitHub token.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div id="vaultTabLog" class="vault-tab-panel hidden space-y-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--gold-primary);">
+              CRDT-Lite Per-Cell Timestamp &amp; Sync Audit Log
+            </h3>
+            <p class="text-xs italic" style="color: var(--text-secondary);">
+              Every habit cell carries a millisecond timestamp (<code class="text-[#FFE27A]">cellTimestamps["habitId_dayIdx"]</code>). Whichever device toggled a specific day most recently wins during a merge.
+            </p>
+          </div>
+          <button id="clearSyncLogBtn" type="button" class="ios-pill-btn px-3 py-1.5 rounded-xl text-xs">
+            Clear Log
+          </button>
+        </div>
+
+        <div id="syncActivityLogBox" class="p-4 rounded-2xl border h-52 overflow-y-auto custom-scrollbar space-y-2 text-xs font-mono"
+             style="background: rgba(12, 3, 10, 0.65); border-color: var(--border-specular); color: var(--text-secondary);">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const STORAGE_KEY = 'opus_1974_sovereign_ledger_v4';
+      const GH_CONFIG_KEY = 'opus_1974_github_config_v4';
+      const THEME_KEY = 'opus_1974_theme_v4';
+      const SOUND_KEY = 'opus_1974_sound_v4';
+      const IDB_NAME = 'AlchemicalChronicleDB';
+      const IDB_STORE = 'handles';
+      const IDB_HANDLE_KEY = 'well_ledger_file_handle';
+
+      const ROMAN_NUMERALS = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+
+      const DAYS = [
+        { short: 'MON', full: 'Monday', date: 'Oct 12' },
+        { short: 'TUE', full: 'Tuesday', date: 'Oct 13' },
+        { short: 'WED', full: 'Wednesday', date: 'Oct 14' },
+        { short: 'THU', full: 'Thursday', date: 'Oct 15' },
+        { short: 'FRI', full: 'Friday', date: 'Oct 16' },
+        { short: 'SAT', full: 'Saturday', date: 'Oct 17' },
+        { short: 'SUN', full: 'Sunday', date: 'Oct 18' }
+      ];
+
+      const CATEGORIES = {
+        'Health & Diet': {
+          name: 'Health & Diet',
+          shortName: 'Health & Diet',
+          color: '#F2C94C',
+          bgTint: 'rgba(242, 201, 76, 0.15)',
+          borderTint: 'rgba(242, 201, 76, 0.38)',
+          symbol: '☉'
+        },
+        'Fitness': {
+          name: 'Fitness',
+          shortName: 'Fitness',
+          color: '#E25B78',
+          bgTint: 'rgba(226, 91, 120, 0.16)',
+          borderTint: 'rgba(226, 91, 120, 0.38)',
+          symbol: '🜂'
+        },
+        'Study & Focus': {
+          name: 'Study & Focus',
+          shortName: 'Study & Focus',
+          color: '#DFC07A',
+          bgTint: 'rgba(223, 192, 122, 0.16)',
+          borderTint: 'rgba(223, 192, 122, 0.38)',
+          symbol: '☿'
+        },
+        'Care & Hygiene': {
+          name: 'Care & Hygiene',
+          shortName: 'Care & Hygiene',
+          color: '#CF76B2',
+          bgTint: 'rgba(207, 118, 178, 0.16)',
+          borderTint: 'rgba(207, 118, 178, 0.38)',
+          symbol: '♛'
+        }
+      };
+
+      function getDefaultState() {
+        const baseTs = 1760400000000; // Deterministic baseline timestamp so newer user toggles always win
+        const defaultHabits = [
+          {
+            id: 'h-1',
+            name: 'Hydrate 2.5L.',
+            subtitle: 'Pure cellular vitality & golden alchemical equilibrium',
+            category: 'Health & Diet',
+            color: '#F2C94C', // 24k Alchemical Gold
+            days: [1, 1, 1, 1, 1, 1, 1],
+            updatedAt: baseTs
+          },
+          {
+            id: 'h-2',
+            name: 'Diet- No Zomato orders or Meal deviations.',
+            subtitle: 'Sovereign nourishment — zero external culinary compromises',
+            category: 'Health & Diet',
+            color: '#E8923A', // Saffron Harvest Amber
+            days: [1, 1, 1, 1, 1, 'freeze', 1],
+            updatedAt: baseTs
+          },
+          {
+            id: 'h-3',
+            name: 'Walking- 20 mins. or some basic exercise class on Fitelo app.',
+            subtitle: 'Daily kinetic motion & guided physical conditioning',
+            category: 'Fitness',
+            color: '#E25B78', // Imperial Rose-Garnet
+            days: [1, 1, 'freeze', 1, 1, 1, 1],
+            updatedAt: baseTs
+          },
+          {
+            id: 'h-4',
+            name: 'Study for 2-3 hours atleast everyday.',
+            subtitle: 'Deep contemplative focus & unbroken intellectual mastery',
+            category: 'Study & Focus',
+            color: '#DFC07A', // Vintage Champagne Brass
+            days: [1, 1, 1, 1, 0, 1, 1],
+            updatedAt: baseTs
+          },
+          {
+            id: 'h-5',
+            name: "Take care of Mother's wellbeing especially massager, diet-exercise and medication as well as mental health.",
+            subtitle: 'Filial devotion — massager therapy, regimen, medicine & joyful spirit',
+            category: 'Care & Hygiene',
+            color: '#CF76B2', // Velvet Amethyst Orchid
+            days: [1, 1, 1, 1, 1, 1, 1],
+            updatedAt: baseTs
+          },
+          {
+            id: 'h-6',
+            name: 'Shower and Brush daily.',
+            subtitle: 'Morning & evening purification ritual of body and temple',
+            category: 'Care & Hygiene',
+            color: '#D98A54', // Burnished Copper-Gold
+            days: [1, 1, 1, 1, 1, 1, 1],
+            updatedAt: baseTs
+          }
+        ];
+
+        const cellTimestamps = {};
+        const cellOrigins = {};
+        defaultHabits.forEach(h => {
+          for (let d = 0; d < 7; d++) {
+            cellTimestamps[`${h.id}_${d}`] = baseTs;
+            cellOrigins[`${h.id}_${d}`] = 'Initial Ledger';
+          }
+        });
+
+        return {
+          schemaVersion: 4,
+          todayIndex: 2, // Wednesday, Oct 14 default focus
+          activeCategoryFilter: 'ALL',
+          freezeBrushActive: false,
+          selectedColor: '#F2C94C',
+          deviceOrigin: detectDefaultDeviceName(),
+          lastModifiedAt: baseTs,
+          habits: defaultHabits,
+          cellTimestamps,
+          cellOrigins,
+          deletedHabits: {}
+        };
+      }
+
+      function detectDefaultDeviceName() {
+        const ua = navigator.userAgent || '';
+        if (/SM-T|Tab|GT-P/i.test(ua)) return 'Samsung Tablet';
+        if (/Samsung|SM-|Android/i.test(ua)) return 'Samsung Phone';
+        return 'Lenovo Laptop';
+      }
+
+      let audioCtx = null;
+      let soundEnabled = localStorage.getItem(SOUND_KEY) !== 'off';
+
+      function playTactileSound(type, stepIndex = 0) {
+        if (!soundEnabled) return;
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          if (!audioCtx) audioCtx = new AudioContextClass();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          const now = audioCtx.currentTime;
+
+          if (type === 'check') {
+            const baseFreqs = [293.66, 329.63, 369.99, 440.0, 493.88, 587.33];
+            const freq = baseFreqs[stepIndex % baseFreqs.length];
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now);
+            osc.frequency.exponentialRampToValueAtTime(freq * 1.008, now + 0.12);
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.11, now + 0.012);
+            gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.24);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.25);
+          } else if (type === 'uncheck') {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(196, now);
+            osc.frequency.exponentialRampToValueAtTime(130, now + 0.11);
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start(now);
+            osc.stop(now + 0.13);
+          } else if (type === 'freeze') {
+            [523.25, 659.25].forEach((f, idx) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(f, now + idx * 0.055);
+              gain.gain.setValueAtTime(0.07, now + idx * 0.055);
+              gain.gain.exponentialRampToValueAtTime(0.0008, now + idx * 0.055 + 0.28);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + idx * 0.055);
+              osc.stop(now + idx * 0.055 + 0.3);
+            });
+          } else if (type === 'sync') {
+            [440.0, 554.37, 659.25].forEach((f, idx) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'sine';
+              osc.frequency.setValueAtTime(f, now + idx * 0.04);
+              gain.gain.setValueAtTime(0.04, now + idx * 0.04);
+              gain.gain.exponentialRampToValueAtTime(0.0008, now + idx * 0.04 + 0.22);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + idx * 0.04);
+              osc.stop(now + idx * 0.04 + 0.24);
+            });
+          } else if (type === 'astound') {
+            [293.66, 369.99, 440.0, 554.37, 659.25].forEach((f, idx) => {
+              const osc = audioCtx.createOscillator();
+              const gain = audioCtx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(f, now + idx * 0.045);
+              gain.gain.setValueAtTime(0.001, now + idx * 0.045);
+              gain.gain.linearRampToValueAtTime(0.065, now + idx * 0.045 + 0.02);
+              gain.gain.exponentialRampToValueAtTime(0.0008, now + idx * 0.045 + 0.65);
+              osc.connect(gain);
+              gain.connect(audioCtx.destination);
+              osc.start(now + idx * 0.045);
+              osc.stop(now + idx * 0.045 + 0.68);
+            });
+          }
+        } catch (e) {
+          // Ignore audio context restrictions
+        }
+      }
+
+      let state = loadState();
+      let ghConfig = loadGithubConfig();
+      let boundWellFileHandle = null;
+      let pendingWellFileHandle = null;
+      let githubPushDebounceTimer = null;
+      let lastDeletedHabit = null;
+      let lastAnimatedCellKey = null;
+      let syncLogs = [];
+
+      function logSyncEvent(message, level = 'info') {
+        const timeStr = new Date().toLocaleTimeString([], { hour12: false });
+        syncLogs.unshift({ timeStr, message, level });
+        if (syncLogs.length > 60) syncLogs.pop();
+        renderSyncLogBox();
+      }
+
+      function renderSyncLogBox() {
+        const box = document.getElementById('syncActivityLogBox');
+        if (!box) return;
+        if (syncLogs.length === 0) {
+          box.innerHTML = `<div class="italic text-[#9D7A64]">No sync events recorded in this session yet.</div>`;
+          return;
+        }
+        box.innerHTML = syncLogs.map(item => {
+          const color = item.level === 'success' ? '#FFE27A' : item.level === 'error' ? '#E25B78' : '#D5B88B';
+          return `<div class="border-b border-[#F2C94C]/10 pb-1">
+            <span class="text-[#9D7A64]">[${item.timeStr}]</span>
+            <span style="color: ${color};">${escapeHTML(item.message)}</span>
+          </div>`;
+        }).join('');
+      }
+
+      function normalizeLedger(raw) {
+        const fallback = getDefaultState();
+        if (!raw || !Array.isArray(raw.habits)) return fallback;
+        return {
+          schemaVersion: 4,
+          todayIndex: typeof raw.todayIndex === 'number' ? Math.min(6, Math.max(0, raw.todayIndex)) : fallback.todayIndex,
+          activeCategoryFilter: raw.activeCategoryFilter || 'ALL',
+          freezeBrushActive: false,
+          selectedColor: raw.selectedColor || '#F2C94C',
+          deviceOrigin: raw.deviceOrigin || fallback.deviceOrigin,
+          lastModifiedAt: Number(raw.lastModifiedAt) || 1760400000000,
+          habits: raw.habits.map(h => ({
+            id: h.id,
+            name: h.name,
+            subtitle: h.subtitle || 'Personal daily vow inscribed in the chronicle',
+            category: CATEGORIES[h.category] ? h.category : 'Health & Diet',
+            color: h.color || '#F2C94C',
+            days: Array.isArray(h.days) && h.days.length === 7 ? [...h.days] : [0, 0, 0, 0, 0, 0, 0],
+            updatedAt: Number(h.updatedAt) || 1760400000000
+          })),
+          cellTimestamps: Object.assign({}, fallback.cellTimestamps, raw.cellTimestamps || {}),
+          cellOrigins: Object.assign({}, fallback.cellOrigins, raw.cellOrigins || {}),
+          deletedHabits: Object.assign({}, raw.deletedHabits || {})
+        };
+      }
+
+      /**
+       * CRDT-Lite Per-Cell Timestamp Merge:
+       * Merges localLedger and remoteLedger deterministically cell-by-cell (`${habitId}_${dayIdx}`)
+       * so checking a habit on Samsung Phone and another on Lenovo Laptop never overwrites either.
+       */
+      function mergeLedgers(localRaw, remoteRaw) {
+        const local = normalizeLedger(localRaw);
+        const remote = normalizeLedger(remoteRaw);
+
+        const mergedDeleted = Object.assign({}, local.deletedHabits);
+        Object.keys(remote.deletedHabits || {}).forEach(hId => {
+          const rDelTs = Number(remote.deletedHabits[hId]) || 0;
+          const lDelTs = Number(mergedDeleted[hId]) || 0;
+          if (rDelTs > lDelTs) mergedDeleted[hId] = rDelTs;
+        });
+
+        const habitMap = new Map();
+        local.habits.forEach(h => habitMap.set(h.id, JSON.parse(JSON.stringify(h))));
+
+        let remoteCellsWon = 0;
+        let localCellsWon = 0;
+        let habitsAddedFromRemote = 0;
+
+        remote.habits.forEach(rHabit => {
+          const delTs = Number(mergedDeleted[rHabit.id]) || 0;
+          if (delTs > (Number(rHabit.updatedAt) || 0)) {
+            return;
+          }
+          if (!habitMap.has(rHabit.id)) {
+            habitMap.set(rHabit.id, JSON.parse(JSON.stringify(rHabit)));
+            habitsAddedFromRemote++;
+          } else {
+            const lHabit = habitMap.get(rHabit.id);
+            if ((Number(rHabit.updatedAt) || 0) > (Number(lHabit.updatedAt) || 0)) {
+              lHabit.name = rHabit.name;
+              lHabit.subtitle = rHabit.subtitle;
+              lHabit.category = rHabit.category;
+              lHabit.color = rHabit.color;
+              lHabit.updatedAt = rHabit.updatedAt;
+            }
+          }
+        });
+
+        // Remove any local habit that was deleted more recently on remote
+        Array.from(habitMap.keys()).forEach(hId => {
+          const h = habitMap.get(hId);
+          const delTs = Number(mergedDeleted[hId]) || 0;
+          if (delTs > (Number(h.updatedAt) || 0)) {
+            habitMap.delete(hId);
+          }
+        });
+
+        const mergedCellTimestamps = Object.assign({}, local.cellTimestamps);
+        const mergedCellOrigins = Object.assign({}, local.cellOrigins);
+
+        habitMap.forEach(habit => {
+          const rHabit = remote.habits.find(rh => rh.id === habit.id);
+          const lHabit = local.habits.find(lh => lh.id === habit.id);
+
+          for (let d = 0; d < 7; d++) {
+            const key = `${habit.id}_${d}`;
+            const lTs = Number(local.cellTimestamps[key]) || 0;
+            const rTs = Number(remote.cellTimestamps[key]) || 0;
+
+            if (rHabit && rTs > lTs) {
+              if (habit.days[d] !== rHabit.days[d]) remoteCellsWon++;
+              habit.days[d] = rHabit.days[d];
+              mergedCellTimestamps[key] = rTs;
+              mergedCellOrigins[key] = (remote.cellOrigins && remote.cellOrigins[key]) || remote.deviceOrigin || 'Remote Node';
+            } else if (lHabit) {
+              if (rHabit && habit.days[d] !== rHabit.days[d] && lTs > rTs) localCellsWon++;
+              habit.days[d] = lHabit.days[d];
+              mergedCellTimestamps[key] = lTs;
+              mergedCellOrigins[key] = (local.cellOrigins && local.cellOrigins[key]) || local.deviceOrigin;
+            }
+          }
+        });
+
+        const mergedLedger = {
+          schemaVersion: 4,
+          todayIndex: local.todayIndex,
+          activeCategoryFilter: local.activeCategoryFilter,
+          freezeBrushActive: local.freezeBrushActive,
+          selectedColor: local.selectedColor,
+          deviceOrigin: local.deviceOrigin,
+          lastModifiedAt: Math.max(local.lastModifiedAt || 0, remote.lastModifiedAt || 0, Date.now()),
+          habits: Array.from(habitMap.values()),
+          cellTimestamps: mergedCellTimestamps,
+          cellOrigins: mergedCellOrigins,
+          deletedHabits: mergedDeleted
+        };
+
+        return {
+          mergedLedger,
+          remoteCellsWon,
+          localCellsWon,
+          habitsAddedFromRemote
+        };
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return getDefaultState();
+          return normalizeLedger(JSON.parse(raw));
+        } catch (err) {
+          return getDefaultState();
+        }
+      }
+
+      function getSerializableLedger(srcState = state) {
+        return {
+          schemaVersion: 4,
+          todayIndex: srcState.todayIndex,
+          deviceOrigin: srcState.deviceOrigin,
+          lastModifiedAt: srcState.lastModifiedAt || Date.now(),
+          habits: srcState.habits,
+          cellTimestamps: srcState.cellTimestamps,
+          cellOrigins: srcState.cellOrigins,
+          deletedHabits: srcState.deletedHabits || {}
+        };
+      }
+
+      function saveState(triggerRemoteSync = true) {
+        try {
+          state.lastModifiedAt = Date.now();
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(getSerializableLedger(state)));
+        } catch (err) {
+          // Ignore storage quota errors
+        }
+        if (triggerRemoteSync) {
+          if (boundWellFileHandle) {
+            writeToBoundWellFile();
+          }
+          if (isGithubConfigured()) {
+            scheduleGithubPush();
+          }
+        }
+        updateSyncStatusUI();
+      }
+
+      // IndexedDB helper for storing FileSystemFileHandle across browser restarts
+      function openHandlesDB() {
+        return new Promise((resolve, reject) => {
+          if (!window.indexedDB) return reject(new Error('IndexedDB unavailable'));
+          const req = indexedDB.open(IDB_NAME, 1);
+          req.onupgradeneeded = () => {
+            const db = req.result;
+            if (!db.objectStoreNames.contains(IDB_STORE)) {
+              db.createObjectStore(IDB_STORE);
+            }
+          };
+          req.onsuccess = () => resolve(req.result);
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      async function saveHandleToIDB(handle) {
+        try {
+          const db = await openHandlesDB();
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction(IDB_STORE, 'readwrite');
+            tx.objectStore(IDB_STORE).put(handle, IDB_HANDLE_KEY);
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+          });
+        } catch (e) {
+          // Ignore IDB errors in restricted environments
+        }
+      }
+
+      async function getHandleFromIDB() {
+        try {
+          const db = await openHandlesDB();
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction(IDB_STORE, 'readonly');
+            const req = tx.objectStore(IDB_STORE).get(IDB_HANDLE_KEY);
+            req.onsuccess = () => resolve(req.result || null);
+            req.onerror = () => reject(req.error);
+          });
+        } catch (e) {
+          return null;
+        }
+      }
+
+      async function clearHandleFromIDB() {
+        try {
+          const db = await openHandlesDB();
+          return new Promise((resolve) => {
+            const tx = db.transaction(IDB_STORE, 'readwrite');
+            tx.objectStore(IDB_STORE).delete(IDB_HANDLE_KEY);
+            tx.oncomplete = () => resolve();
+          });
+        } catch (e) {}
+      }
+
+      async function restoreSavedWellFileHandle() {
+        const savedHandle = await getHandleFromIDB();
+        if (!savedHandle) return;
+        try {
+          if (typeof savedHandle.queryPermission === 'function') {
+            const perm = await savedHandle.queryPermission({ mode: 'readwrite' });
+            if (perm === 'granted') {
+              boundWellFileHandle = savedHandle;
+              logSyncEvent(`Restored Well folder file handle: ${savedHandle.name}`, 'success');
+              await pullAndMergeFromBoundWellFile(true);
+              updateSyncStatusUI();
+              return;
+            }
+          }
+          // Needs a 1-click user gesture to re-verify permission after browser restart
+          pendingWellFileHandle = savedHandle;
+          const banner = document.getElementById('wellPermissionBanner');
+          const fileSpan = document.getElementById('pendingHandleFileName');
+          if (banner && fileSpan) {
+            fileSpan.textContent = savedHandle.name || 'chronicle-ledger.json';
+            banner.classList.remove('hidden');
+          }
+          updateSyncStatusUI();
+        } catch (e) {
+          logSyncEvent(`Stored handle check note: ${e.message}`, 'info');
+        }
+      }
+
+      async function verifyPendingWellHandle() {
+        if (!pendingWellFileHandle) return;
+        try {
+          const perm = await pendingWellFileHandle.requestPermission({ mode: 'readwrite' });
+          if (perm === 'granted') {
+            boundWellFileHandle = pendingWellFileHandle;
+            pendingWellFileHandle = null;
+            document.getElementById('wellPermissionBanner').classList.add('hidden');
+            await pullAndMergeFromBoundWellFile(false);
+            await writeToBoundWellFile();
+            playTactileSound('sync');
+            showToast(`Well Folder file "${boundWellFileHandle.name}" verified & synced.`);
+            updateSyncStatusUI();
+          }
+        } catch (err) {
+          showToast(`Could not verify file permission: ${err.message}`);
+        }
+      }
+
+      async function bindExistingWellFile() {
+        if (typeof window.showOpenFilePicker !== 'function') {
+          showToast('Native File Picker requires HTTPS or desktop Chrome/Edge. Use Export/Import fallback on the right.');
+          return;
+        }
+        try {
+          const [handle] = await window.showOpenFilePicker({
+            multiple: false,
+            types: [{
+              description: 'Alchemical Chronicle JSON Ledger',
+              accept: { 'application/json': ['.json'] }
+            }]
+          });
+          boundWellFileHandle = handle;
+          pendingWellFileHandle = null;
+          document.getElementById('wellPermissionBanner').classList.add('hidden');
+          await saveHandleToIDB(handle);
+          await pullAndMergeFromBoundWellFile(false);
+          await writeToBoundWellFile();
+          playTactileSound('sync');
+          updateSyncStatusUI();
+          showToast(`Bound & merged with Well/${handle.name}`);
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            showToast(`File bind error: ${err.message}`);
+          }
+        }
+      }
+
+      async function createNewWellFile() {
+        if (typeof window.showSaveFilePicker !== 'function') {
+          showToast('Native Save Picker requires HTTPS or desktop Chrome/Edge. Use Export JSON fallback.');
+          return;
+        }
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: 'chronicle-ledger.json',
+            types: [{
+              description: 'Alchemical Chronicle JSON Ledger',
+              accept: { 'application/json': ['.json'] }
+            }]
+          });
+          boundWellFileHandle = handle;
+          pendingWellFileHandle = null;
+          document.getElementById('wellPermissionBanner').classList.add('hidden');
+          await saveHandleToIDB(handle);
+          await writeToBoundWellFile();
+          playTactileSound('sync');
+          updateSyncStatusUI();
+          showToast(`Created & bound Well/${handle.name}`);
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            showToast(`File creation error: ${err.message}`);
+          }
+        }
+      }
+
+      async function pullAndMergeFromBoundWellFile(silent = false) {
+        if (!boundWellFileHandle) {
+          if (!silent) showToast('No Well folder file bound yet.');
+          return;
+        }
+        try {
+          const file = await boundWellFileHandle.getFile();
+          const text = await file.text();
+          if (text && text.trim().startsWith('{')) {
+            const remoteData = JSON.parse(text);
+            const { mergedLedger, remoteCellsWon, habitsAddedFromRemote } = mergeLedgers(state, remoteData);
+            state = mergedLedger;
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(getSerializableLedger(state)));
+            renderAll();
+            logSyncEvent(`Pulled "${boundWellFileHandle.name}" (${remoteCellsWon} newer cell(s), ${habitsAddedFromRemote} new vow(s) merged).`, 'success');
+            if (!silent) {
+              showToast(`Merged "${boundWellFileHandle.name}" (${remoteCellsWon} cell updates applied).`);
+            }
+          }
+        } catch (err) {
+          logSyncEvent(`Well file read error: ${err.message}`, 'error');
+          if (!silent) showToast(`Could not read bound file: ${err.message}`);
+        }
+      }
+
+      async function writeToBoundWellFile() {
+        if (!boundWellFileHandle) return;
+        try {
+          const writable = await boundWellFileHandle.createWritable();
+          const payload = JSON.stringify(getSerializableLedger(state), null, 2);
+          await writable.write(payload);
+          await writable.close();
+          logSyncEvent(`Streamed state to Well/${boundWellFileHandle.name} (${state.deviceOrigin})`, 'success');
+          updateSyncStatusUI('Synced just now');
+        } catch (err) {
+          logSyncEvent(`Well file write error: ${err.message}`, 'error');
+        }
+      }
+
+      function loadGithubConfig() {
+        try {
+          const raw = localStorage.getItem(GH_CONFIG_KEY);
+          if (!raw) {
+            return {
+              mode: 'repo',
+              owner: '',
+              repo: '',
+              branch: 'main',
+              path: 'Well/chronicle-ledger.json',
+              gistId: '',
+              token: '',
+              lastSha: ''
+            };
+          }
+          return Object.assign({
+            mode: 'repo',
+            owner: '',
+            repo: '',
+            branch: 'main',
+            path: 'Well/chronicle-ledger.json',
+            gistId: '',
+            token: '',
+            lastSha: ''
+          }, JSON.parse(raw));
+        } catch (e) {
+          return { mode: 'repo', owner: '', repo: '', branch: 'main', path: 'Well/chronicle-ledger.json', gistId: '', token: '', lastSha: '' };
+        }
+      }
+
+      function saveGithubConfigToStorage() {
+        try {
+          localStorage.setItem(GH_CONFIG_KEY, JSON.stringify(ghConfig));
+        } catch (e) {}
+      }
+
+      function isGithubConfigured() {
+        if (!ghConfig || !ghConfig.token) return false;
+        if (ghConfig.mode === 'gist') return Boolean(ghConfig.gistId);
+        return Boolean(ghConfig.owner && ghConfig.repo && ghConfig.path);
+      }
+
+      function utf8ToBase64(str) {
+        return btoa(unescape(encodeURIComponent(str)));
+      }
+
+      function base64ToUtf8(b64) {
+        return decodeURIComponent(escape(atob(b64.replace(/\s/g, ''))));
+      }
+
+      function scheduleGithubPush() {
+        if (!isGithubConfigured()) return;
+        if (githubPushDebounceTimer) clearTimeout(githubPushDebounceTimer);
+        githubPushDebounceTimer = setTimeout(() => {
+          pushToGithubCloud(true);
+        }, 600);
+      }
+
+      async function pullFromGithubCloud(silent = false) {
+        if (!isGithubConfigured()) {
+          if (!silent) showToast('Configure your GitHub Repository or Secret Gist token first.');
+          return false;
+        }
+        setSyncSpinning(true);
+        try {
+          const headers = {
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${ghConfig.token}`
+          };
+
+          if (ghConfig.mode === 'gist') {
+            const res = await fetch(`https://api.github.com/gists/${encodeURIComponent(ghConfig.gistId)}`, { headers, cache: 'no-store' });
+            if (!res.ok) throw new Error(`GitHub Gist HTTP ${res.status}`);
+            const data = await res.json();
+            const fileObj = data.files && (data.files['chronicle-ledger.json'] || Object.values(data.files)[0]);
+            if (fileObj && fileObj.content) {
+              const remoteLedger = JSON.parse(fileObj.content);
+              const { mergedLedger, remoteCellsWon } = mergeLedgers(state, remoteLedger);
+              state = mergedLedger;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(getSerializableLedger(state)));
+              if (boundWellFileHandle) await writeToBoundWellFile();
+              renderAll();
+              logSyncEvent(`GitHub Gist pulled & merged (${remoteCellsWon} newer remote cell(s)).`, 'success');
+              if (!silent) showToast(`GitHub Gist synced (${remoteCellsWon} updates merged).`);
+            }
+          } else {
+            const cleanPath = ghConfig.path.replace(/^\/+/, '');
+            const url = `https://api.github.com/repos/${encodeURIComponent(ghConfig.owner)}/${encodeURIComponent(ghConfig.repo)}/contents/${cleanPath}?ref=${encodeURIComponent(ghConfig.branch || 'main')}`;
+            const res = await fetch(url, { headers, cache: 'no-store' });
+            if (res.status === 404) {
+              logSyncEvent(`GitHub file "${cleanPath}" not found yet — creating initial commit on push.`, 'info');
+              await pushToGithubCloud(silent);
+              setSyncSpinning(false);
+              return true;
+            }
+            if (!res.ok) throw new Error(`GitHub Repo HTTP ${res.status}`);
+            const data = await res.json();
+            if (data.sha) {
+              ghConfig.lastSha = data.sha;
+              saveGithubConfigToStorage();
+              updateShaBadge();
+            }
+            if (data.content) {
+              const jsonStr = base64ToUtf8(data.content);
+              const remoteLedger = JSON.parse(jsonStr);
+              const { mergedLedger, remoteCellsWon } = mergeLedgers(state, remoteLedger);
+              state = mergedLedger;
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(getSerializableLedger(state)));
+              if (boundWellFileHandle) await writeToBoundWellFile();
+              renderAll();
+              logSyncEvent(`GitHub Repo pulled (${data.sha.slice(0, 7)}) — ${remoteCellsWon} remote cell(s) merged.`, 'success');
+              if (!silent) showToast(`Synced with GitHub (${remoteCellsWon} cell updates merged).`);
+            }
+          }
+          updateSyncStatusUI('Synced just now');
+          setSyncSpinning(false);
+          return true;
+        } catch (err) {
+          setSyncSpinning(false);
+          logSyncEvent(`GitHub pull error: ${err.message}`, 'error');
+          if (!silent) showToast(`GitHub Pull Error: ${err.message}`);
+          return false;
+        }
+      }
+
+      async function pushToGithubCloud(silent = false, retryCount = 0) {
+        if (!isGithubConfigured()) {
+          if (!silent) showToast('Configure your GitHub Repository or Secret Gist token first.');
+          return false;
+        }
+        setSyncSpinning(true);
+        try {
+          const headers = {
+            'Accept': 'application/vnd.github+json',
+            'Authorization': `Bearer ${ghConfig.token}`,
+            'Content-Type': 'application/json'
+          };
+          const payloadStr = JSON.stringify(getSerializableLedger(state), null, 2);
+
+          if (ghConfig.mode === 'gist') {
+            const res = await fetch(`https://api.github.com/gists/${encodeURIComponent(ghConfig.gistId)}`, {
+              method: 'PATCH',
+              headers,
+              body: JSON.stringify({
+                description: `Alchemical Habit Chronicle Ledger — Last synced from ${state.deviceOrigin}`,
+                files: {
+                  'chronicle-ledger.json': { content: payloadStr }
+                }
+              })
+            });
+            if (!res.ok) throw new Error(`GitHub Gist PATCH HTTP ${res.status}`);
+            logSyncEvent(`Pushed ledger to Secret Gist (${ghConfig.gistId.slice(0, 8)}...) from ${state.deviceOrigin}`, 'success');
+            if (!silent) showToast('Pushed merged ledger to GitHub Secret Gist.');
+          } else {
+            const cleanPath = ghConfig.path.replace(/^\/+/, '');
+            const baseUrl = `https://api.github.com/repos/${encodeURIComponent(ghConfig.owner)}/${encodeURIComponent(ghConfig.repo)}/contents/${cleanPath}`;
+
+            // Fetch current SHA if unknown so GitHub accepts the update cleanly
+            if (!ghConfig.lastSha) {
+              const checkRes = await fetch(`${baseUrl}?ref=${encodeURIComponent(ghConfig.branch || 'main')}`, { headers, cache: 'no-store' });
+              if (checkRes.ok) {
+                const checkData = await checkRes.json();
+                if (checkData.sha) ghConfig.lastSha = checkData.sha;
+              }
+            }
+
+            const bodyObj = {
+              message: `Sync chronicle-ledger.json via ${state.deviceOrigin} (${new Date().toISOString()})`,
+              content: utf8ToBase64(payloadStr),
+              branch: ghConfig.branch || 'main'
+            };
+            if (ghConfig.lastSha) bodyObj.sha = ghConfig.lastSha;
+
+            const putRes = await fetch(baseUrl, {
+              method: 'PUT',
+              headers,
+              body: JSON.stringify(bodyObj)
+            });
+
+            if (putRes.status === 409 && retryCount < 1) {
+              // SHA conflict: pull & CRDT-merge first, then retry push once
+              ghConfig.lastSha = '';
+              await pullFromGithubCloud(true);
+              setSyncSpinning(false);
+              return pushToGithubCloud(silent, retryCount + 1);
+            }
+
+            if (!putRes.ok) {
+              const errJson = await putRes.json().catch(() => ({}));
+              throw new Error(errJson.message || `GitHub PUT HTTP ${putRes.status}`);
+            }
+
+            const putData = await putRes.json();
+            if (putData.content && putData.content.sha) {
+              ghConfig.lastSha = putData.content.sha;
+              saveGithubConfigToStorage();
+              updateShaBadge();
+            }
+            logSyncEvent(`Pushed to GitHub ${ghConfig.owner}/${ghConfig.repo} (${ghConfig.lastSha.slice(0, 7)})`, 'success');
+            if (!silent) showToast('Pushed merged ledger to GitHub Repository.');
+          }
+
+          updateSyncStatusUI('Synced just now');
+          setSyncSpinning(false);
+          return true;
+        } catch (err) {
+          setSyncSpinning(false);
+          logSyncEvent(`GitHub push error: ${err.message}`, 'error');
+          if (!silent) showToast(`GitHub Push Error: ${err.message}`);
+          return false;
+        }
+      }
+
+      async function autoCreateSecretGist() {
+        const token = document.getElementById('ghTokenInput').value.trim();
+        if (!token) {
+          showToast('Enter your GitHub Personal Access Token below first.');
+          return;
+        }
+        setSyncSpinning(true);
+        try {
+          const payloadStr = JSON.stringify(getSerializableLedger(state), null, 2);
+          const res = await fetch('https://api.github.com/gists', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/vnd.github+json',
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              description: 'The Alchemical Habit Chronicle — Sovereign Sync Ledger',
+              public: false,
+              files: {
+                'chronicle-ledger.json': { content: payloadStr }
+              }
+            })
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          document.getElementById('ghGistIdInput').value = data.id;
+          ghConfig.mode = 'gist';
+          ghConfig.gistId = data.id;
+          ghConfig.token = token;
+          saveGithubConfigToStorage();
+          updateSyncStatusUI('Synced just now');
+          playTactileSound('sync');
+          logSyncEvent(`Created new Secret Gist ID: ${data.id}`, 'success');
+          showToast(`Created Secret Gist (${data.id.slice(0, 8)}...) & synced!`);
+        } catch (err) {
+          showToast(`Could not create Secret Gist: ${err.message}`);
+        } finally {
+          setSyncSpinning(false);
+        }
+      }
+
+      function setSyncSpinning(isSpinning) {
+        const icon = document.getElementById('quickSyncIcon');
+        if (!icon) return;
+        if (isSpinning) icon.classList.add('animate-sync-spin');
+        else icon.classList.remove('animate-sync-spin');
+      }
+
+      function updateShaBadge() {
+        const el = document.getElementById('ghLastShaBadge');
+        if (!el) return;
+        el.textContent = ghConfig.lastSha
+          ? `Remote SHA: ${ghConfig.lastSha.slice(0, 10)}`
+          : 'Remote SHA: Ready';
+      }
+
+      function updateSyncStatusUI(customNote = '') {
+        const dot = document.getElementById('syncStatusDot');
+        const text = document.getElementById('syncStatusText');
+        const boundBadge = document.getElementById('boundFileStatusBadge');
+        const wellTag = document.getElementById('wellEngineStatusTag');
+        const tsLabel = document.getElementById('lastSyncTimestampLabel');
+
+        const hasWell = Boolean(boundWellFileHandle);
+        const hasGh = isGithubConfigured();
+
+        if (hasWell && hasGh) {
+          dot.className = 'w-2 h-2 rounded-full bg-[#4ADE80] animate-pulse';
+          text.textContent = 'Dual-Engine Active • Well + GitHub';
+        } else if (hasWell) {
+          dot.className = 'w-2 h-2 rounded-full bg-[#F2C94C] animate-pulse';
+          text.textContent = `Well Folder Linked (${boundWellFileHandle.name})`;
+        } else if (hasGh) {
+          dot.className = 'w-2 h-2 rounded-full bg-[#FFE27A] animate-pulse';
+          text.textContent = 'GitHub Cloud Active';
+        } else if (pendingWellFileHandle) {
+          dot.className = 'w-2 h-2 rounded-full bg-[#E8923A] animate-ping';
+          text.textContent = 'Verify Well File Access';
+        } else {
+          dot.className = 'w-2 h-2 rounded-full bg-[#D5B88B]';
+          text.textContent = 'Local Cache Only';
+        }
+
+        if (boundBadge) {
+          boundBadge.textContent = hasWell
+            ? `Well Folder: Linked to "${boundWellFileHandle.name}" (Auto-streaming on toggle)`
+            : 'Well Folder: Unbound (Open Sync & PWA Vault to bind Well/chronicle-ledger.json)';
+        }
+
+        if (wellTag) {
+          wellTag.textContent = hasWell ? `Bound: ${boundWellFileHandle.name}` : 'Unbound';
+          wellTag.style.color = hasWell ? '#FFE27A' : 'var(--text-secondary)';
+        }
+
+        if (tsLabel) {
+          const timeFormatted = new Date(state.lastModifiedAt || Date.now()).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+          tsLabel.textContent = customNote
+            ? `${customNote} • Last ledger stamp: ${timeFormatted} (${state.deviceOrigin})`
+            : `Last ledger stamp: ${timeFormatted} • ${state.deviceOrigin}`;
+        }
+      }
+
+      function calculateHabitStreak(habit, upToDayIndex = state.todayIndex) {
+        let streak = 0;
+        let freezeCountInStreak = 0;
+        for (let d = upToDayIndex; d >= 0; d--) {
+          const val = habit.days[d];
+          if (val === 1) {
+            streak++;
+          } else if (val === 'freeze') {
+            freezeCountInStreak++;
+            continue;
+          } else {
+            if (d === upToDayIndex) continue;
+            break;
+          }
+        }
+        return { streak, freezeCountInStreak };
+      }
+
+      function computeDayStats(dayIndex, habitsList = state.habits) {
+        const total = habitsList.length;
+        if (total === 0) {
+          return { completed: 0, frozen: 0, missed: 0, total: 0, effectiveTotal: 0, percent: 0 };
+        }
+        let completed = 0;
+        let frozen = 0;
+        habitsList.forEach(h => {
+          if (h.days[dayIndex] === 1) completed++;
+          else if (h.days[dayIndex] === 'freeze') frozen++;
+        });
+        const effectiveTotal = Math.max(0, total - frozen);
+        const missed = Math.max(0, effectiveTotal - completed);
+        const percent = effectiveTotal > 0 ? Math.round((completed / effectiveTotal) * 100) : (frozen > 0 ? 100 : 0);
+        return { completed, frozen, missed, total, effectiveTotal, percent };
+      }
+
+      function computeOverallTelemetry() {
+        const habits = state.habits;
+        const dailyStats = DAYS.map((_, idx) => computeDayStats(idx, habits));
+        const todayStats = dailyStats[state.todayIndex];
+
+        let activeWeeklyStreak = 0;
+        for (let d = state.todayIndex; d >= 0; d--) {
+          const ds = dailyStats[d];
+          if (ds.total === 0) break;
+          if (ds.percent >= 70) {
+            activeWeeklyStreak++;
+          } else if (d === state.todayIndex) {
+            continue;
+          } else {
+            break;
+          }
+        }
+
+        let totalCompletedChecks = 0;
+        let totalFrozenChecks = 0;
+        const totalCells = habits.length * 7;
+        habits.forEach(h => {
+          h.days.forEach(val => {
+            if (val === 1) totalCompletedChecks++;
+            else if (val === 'freeze') totalFrozenChecks++;
+          });
+        });
+        const effectiveCells = Math.max(0, totalCells - totalFrozenChecks);
+        const weeklyRate = effectiveCells > 0
+          ? Math.round((totalCompletedChecks / effectiveCells) * 100)
+          : 0;
+
+        let bestHabit = null;
+        let bestScore = -1;
+        habits.forEach(h => {
+          let done = 0;
+          let frz = 0;
+          h.days.forEach(v => {
+            if (v === 1) done++;
+            else if (v === 'freeze') frz++;
+          });
+          const eff = Math.max(1, 7 - frz);
+          const rate = Math.round((done / eff) * 100);
+          const { streak } = calculateHabitStreak(h, 6);
+          const compositeScore = rate * 100 + streak * 10 + done;
+          if (compositeScore > bestScore) {
+            bestScore = compositeScore;
+            bestHabit = { habit: h, rate, streak, done, frz };
+          }
+        });
+
+        return {
+          dailyStats,
+          todayStats,
+          activeWeeklyStreak,
+          totalCompletedChecks,
+          totalFrozenChecks,
+          effectiveCells,
+          weeklyRate,
+          bestHabit
+        };
+      }
+
+      function renderEdisonManifesto(todayStats) {
+        const pct = todayStats.percent;
+        const dayMeta = DAYS[state.todayIndex];
+        const titleEl = document.getElementById('filamentStateTitle');
+        const pctEl = document.getElementById('filamentLuminosityPct');
+        const barEl = document.getElementById('filamentProgressBar');
+        const subEl = document.getElementById('filamentSubCaption');
+        const glowEl = document.getElementById('edisonRadialGlow');
+        const bulbEl = document.getElementById('edisonBulbIcon');
+
+        pctEl.textContent = `${pct}%`;
+        barEl.style.width = `${pct}%`;
+
+        if (pct === 100 && todayStats.total > 0) {
+          titleEl.textContent = 'Astounding Capability (100%)';
+          titleEl.style.color = '#FFE27A';
+          subEl.textContent = `All ${todayStats.effectiveTotal} active daily vows illuminated on ${dayMeta.full}.`;
+          glowEl.style.opacity = '1';
+          bulbEl.style.boxShadow = '0 0 24px rgba(255, 226, 122, 0.75)';
+        } else if (pct >= 65) {
+          titleEl.textContent = 'Steady Incandescence';
+          titleEl.style.color = '#F2C94C';
+          subEl.textContent = `${todayStats.completed} of ${todayStats.effectiveTotal} vows glowing on ${dayMeta.full} — near peak capacity.`;
+          glowEl.style.opacity = '0.75';
+          bulbEl.style.boxShadow = '0 0 14px rgba(242, 201, 76, 0.45)';
+        } else if (pct > 0) {
+          titleEl.textContent = 'Kindling Spark';
+          titleEl.style.color = '#E8923A';
+          subEl.textContent = `${todayStats.completed} of ${todayStats.effectiveTotal} vows kindled on ${dayMeta.full}. Keep stoking the filament.`;
+          glowEl.style.opacity = '0.45';
+          bulbEl.style.boxShadow = 'none';
+        } else {
+          titleEl.textContent = 'Dormant Filament';
+          titleEl.style.color = '#9D7A64';
+          subEl.textContent = `Tap a cell below for ${dayMeta.full} to ignite Thomas Edison's filament.`;
+          glowEl.style.opacity = '0.14';
+          bulbEl.style.boxShadow = 'none';
+        }
+      }
+
+      function renderKPICards(telemetry) {
+        const {
+          todayStats,
+          activeWeeklyStreak,
+          totalCompletedChecks,
+          totalFrozenChecks,
+          effectiveCells,
+          weeklyRate,
+          bestHabit
+        } = telemetry;
+
+        renderEdisonManifesto(todayStats);
+
+        const dayMeta = DAYS[state.todayIndex];
+        document.getElementById('kpiTodayDayLabel').textContent = `${dayMeta.short} · ${dayMeta.date.toUpperCase()}`;
+        document.getElementById('kpiTodayRatio').textContent = `${todayStats.completed}/${todayStats.effectiveTotal}`;
+        document.getElementById('kpiTodayPercent').textContent = `${todayStats.percent}%`;
+        document.getElementById('kpiTodayBar').style.width = `${todayStats.percent}%`;
+
+        const freezeNote = document.getElementById('kpiTodayFreezeNote');
+        if (todayStats.frozen > 0) {
+          freezeNote.textContent = `${todayStats.frozen} Freeze ❄`;
+          freezeNote.classList.remove('hidden');
+        } else {
+          freezeNote.classList.add('hidden');
+        }
+
+        const remaining = Math.max(0, todayStats.effectiveTotal - todayStats.completed);
+        const todaySub = document.getElementById('kpiTodaySubtext');
+        if (todayStats.total === 0) {
+          todaySub.textContent = 'Inscribe a vow below to begin your chronicle';
+        } else if (remaining === 0) {
+          todaySub.textContent = `Every vow fulfilled on ${dayMeta.full} — literally astounding`;
+        } else {
+          todaySub.textContent = `${remaining} vow${remaining === 1 ? '' : 's'} remaining to reach 100% on ${dayMeta.full}`;
+        }
+
+        document.getElementById('kpiActiveStreakValue').textContent = `${activeWeeklyStreak} Day${activeWeeklyStreak === 1 ? '' : 's'}`;
+        const statusPill = document.getElementById('kpiStreakStatusPill');
+        if (activeWeeklyStreak >= 5) {
+          statusPill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-[#F2C94C] animate-pulse"></span>Sovereign Flame';
+        } else if (activeWeeklyStreak >= 2) {
+          statusPill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-[#E8923A] animate-pulse"></span>Kindling Rhythm';
+        } else {
+          statusPill.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-[#E25B78]"></span>Awaiting Ignition';
+        }
+        document.getElementById('kpiActiveStreakSub').textContent =
+          `Consecutive days ≥70% fulfilled (${totalFrozenChecks} Freeze shield${totalFrozenChecks === 1 ? '' : 's'} active)`;
+
+        document.getElementById('kpiWeeklyRateValue').textContent = `${weeklyRate}%`;
+        document.getElementById('kpiWeeklyChecksCount').textContent = `${totalCompletedChecks}/${effectiveCells} vows`;
+        document.getElementById('kpiWeeklyRateSub').textContent =
+          totalFrozenChecks > 0
+            ? `${totalFrozenChecks} planned Freeze rest day${totalFrozenChecks === 1 ? '' : 's'} excluded from penalty`
+            : 'Unadulterated weekly velocity across all seven days';
+
+        if (bestHabit && bestHabit.habit) {
+          const bh = bestHabit.habit;
+          const catMeta = CATEGORIES[bh.category] || CATEGORIES['Health & Diet'];
+          const badge = document.getElementById('kpiBestCategoryBadge');
+          badge.textContent = catMeta.shortName;
+          badge.style.backgroundColor = catMeta.bgTint;
+          badge.style.color = catMeta.color;
+          badge.style.borderColor = catMeta.borderTint;
+
+          document.getElementById('kpiBestColorDot').style.backgroundColor = bh.color;
+          const nameEl = document.getElementById('kpiBestHabitName');
+          nameEl.textContent = bh.name;
+          nameEl.title = bh.name;
+
+          document.getElementById('kpiBestHabitMetrics').textContent =
+            `${bestHabit.rate}% velocity · ✦ ${bestHabit.streak}d unbroken`;
+          document.getElementById('kpiBestHabitSub').textContent =
+            bestHabit.frz > 0
+              ? `${bestHabit.done} fulfilled + ${bestHabit.frz} Freeze rest day${bestHabit.frz === 1 ? '' : 's'}`
+              : `${bestHabit.done} of 7 days fulfilled this week`;
+        } else {
+          document.getElementById('kpiBestHabitName').textContent = 'No vows inscribed';
+          document.getElementById('kpiBestHabitMetrics').textContent = '0% · 0d';
+          document.getElementById('kpiBestHabitSub').textContent = 'Add a daily vow to track mastery';
+        }
+      }
+
+      function renderHabitGrid(telemetry) {
+        const headerRow = document.getElementById('gridHeaderRow');
+        const tbody = document.getElementById('habitGridBody');
+
+        let headerHTML = `
+          <th scope="col" class="py-4 pl-5 sm:pl-6 pr-3 text-[11px] font-bold uppercase tracking-[0.18em] min-w-[300px]" style="color: var(--text-secondary);">
+            Daily Vow &amp; Category Pillar
+          </th>
+        `;
+
+        DAYS.forEach((day, idx) => {
+          const isToday = idx === state.todayIndex;
+          const dayStat = telemetry.dailyStats[idx];
+          headerHTML += `
+            <th scope="col" class="py-3 px-1.5 text-center w-14">
+              <button type="button" data-select-day="${idx}"
+                class="group w-full py-2 px-1 rounded-2xl transition-all flex flex-col items-center ${
+                  isToday ? 'scale-[1.03]' : 'hover:opacity-90'
+                }"
+                style="${
+                  isToday
+                    ? 'background: linear-gradient(145deg, #F6D365 0%, #D4941C 55%, #A66A10 100%); color: #1A0515; box-shadow: 0 8px 20px -4px rgba(242, 201, 76, 0.45);'
+                    : 'background: transparent; color: var(--text-secondary); border: 1px solid transparent;'
+                }"
+                title="Inspect ${day.full} (${day.date}) as Active Focus Day">
+                <span class="text-[10px] font-bold tracking-[0.15em] uppercase ${
+                  isToday ? 'text-[#2B081F]' : ''
+                }">${day.short}</span>
+                <span class="text-sm font-bold tabular-nums mt-0.5 ${
+                  isToday ? 'text-[#130510]' : ''
+                }" style="${!isToday ? 'color: var(--text-primary);' : ''}">${day.date.split(' ')[1]}</span>
+                <span class="mt-1 text-[10px] font-bold italic tabular-nums px-1.5 rounded-full"
+                      style="${
+                        isToday
+                          ? 'background: rgba(26, 5, 21, 0.16); color: #1A0515;'
+                          : dayStat.percent === 100
+                          ? 'color: var(--gold-primary);'
+                          : 'color: var(--text-muted);'
+                      }">${dayStat.percent}%</span>
+              </button>
+            </th>
+          `;
+        });
+
+        headerHTML += `
+          <th scope="col" class="py-4 pl-3 pr-5 sm:pr-6 text-right text-[11px] font-bold uppercase tracking-[0.18em] min-w-[120px]" style="color: var(--text-secondary);">
+            Vow Streak
+          </th>
+        `;
+        headerRow.innerHTML = headerHTML;
+
+        const filteredHabits = state.activeCategoryFilter === 'ALL'
+          ? state.habits
+          : state.habits.filter(h => h.category === state.activeCategoryFilter);
+
+        const romanCount = ROMAN_NUMERALS[filteredHabits.length - 1] || filteredHabits.length;
+        document.getElementById('activeHabitCountBadge').textContent =
+          `${romanCount} ${filteredHabits.length === 1 ? 'Vow' : 'Vows'} Active`;
+
+        if (filteredHabits.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="9" class="py-12 text-center italic" style="color: var(--text-muted);">
+                <p class="text-base">No daily vows inscribed under this category pillar.</p>
+                <p class="text-xs mt-1">Select “All” or click “+ New Vow” to inscribe a discipline.</p>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filteredHabits.map((habit, hIndex) => {
+          const catMeta = CATEGORIES[habit.category] || CATEGORIES['Health & Diet'];
+          const { streak } = calculateHabitStreak(habit, state.todayIndex);
+          const romanIdx = ROMAN_NUMERALS[hIndex] || (hIndex + 1);
+
+          let doneCount = 0;
+          let freezeCount = 0;
+          habit.days.forEach(v => {
+            if (v === 1) doneCount++;
+            else if (v === 'freeze') freezeCount++;
+          });
+          const effTotal = Math.max(1, 7 - freezeCount);
+          const rowRate = Math.round((doneCount / effTotal) * 100);
+
+          const dayCellsHTML = habit.days.map((cellState, dIdx) => {
+            const isTodayCol = dIdx === state.todayIndex;
+            const cellKey = `${habit.id}_${dIdx}`;
+            const shouldAnimate = lastAnimatedCellKey === cellKey;
+            const originNode = (state.cellOrigins && state.cellOrigins[cellKey]) || state.deviceOrigin;
+
+            let cellButtonHTML = '';
+            if (cellState === 1) {
+              cellButtonHTML = `
+                <button type="button"
+                  data-habit-id="${habit.id}"
+                  data-day-idx="${dIdx}"
+                  style="background: linear-gradient(145deg, ${habit.color} 0%, ${adjustHexBrightness(habit.color, -26)} 100%); border-color: rgba(255, 244, 208, 0.65); box-shadow: 0 6px 16px -3px ${habit.color}66, inset 0 1px 0 0 rgba(255, 255, 255, 0.55);"
+                  class="habit-cell w-11 h-11 rounded-2xl border text-[#1A0515] flex items-center justify-center hover:brightness-110 active:scale-90 transition-all mx-auto ${shouldAnimate ? 'animate-spring-check' : ''}"
+                  title="${escapeHTML(habit.name)} — ${DAYS[dIdx].full}: Fulfilled via ${escapeHTML(originNode)} (Right-click for Freeze ❄)">
+                  <svg class="w-5 h-5 stroke-[2.6]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </button>
+              `;
+            } else if (cellState === 'freeze') {
+              cellButtonHTML = `
+                <button type="button"
+                  data-habit-id="${habit.id}"
+                  data-day-idx="${dIdx}"
+                  style="background: rgba(223, 192, 122, 0.14); border: 1.5px dashed #DFC07A; color: #FFE27A;"
+                  class="habit-cell w-11 h-11 rounded-2xl flex flex-col items-center justify-center hover:bg-[#DFC07A]/25 active:scale-90 transition-all mx-auto ${shouldAnimate ? 'animate-sanctuary' : ''}"
+                  title="${escapeHTML(habit.name)} — ${DAYS[dIdx].full}: Freeze Rest Shield via ${escapeHTML(originNode)}">
+                  <span class="text-sm leading-none">❄</span>
+                  <span class="text-[8px] font-bold uppercase tracking-widest mt-0.5">REST</span>
+                </button>
+              `;
+            } else {
+              cellButtonHTML = `
+                <button type="button"
+                  data-habit-id="${habit.id}"
+                  data-day-idx="${dIdx}"
+                  style="background: var(--bg-cell-empty); border: 1px solid var(--border-specular);"
+                  class="habit-cell w-11 h-11 rounded-2xl hover:border-[#F2C94C] flex items-center justify-center active:scale-90 transition-all mx-auto group/cell"
+                  title="${escapeHTML(habit.name)} — ${DAYS[dIdx].full}: Uninscribed (Tap to fulfill, Right-click for Freeze ❄)">
+                  <span class="w-1.5 h-1.5 rounded-full transition-transform group-hover/cell:scale-150"
+                        style="background-color: var(--text-muted); opacity: 0.45;"></span>
+                </button>
+              `;
+            }
+
+            return `
+              <td class="py-3.5 px-1.5 text-center transition-colors"
+                  style="${isTodayCol ? 'background: rgba(242, 201, 76, 0.06);' : ''}">
+                ${cellButtonHTML}
+              </td>
+            `;
+          }).join('');
+
+          return `
+            <tr class="group transition-colors hover:bg-[#F2C94C]/[0.04]">
+              <td class="py-4 pl-5 sm:pl-6 pr-3 max-w-[320px] sm:max-w-[410px]">
+                <div class="flex items-start justify-between gap-2.5">
+                  <div class="flex items-start gap-3.5 min-w-0">
+                    <div class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-bold shrink-0 mt-0.5"
+                         style="background: ${catMeta.bgTint}; color: ${habit.color}; border: 1px solid ${habit.color}55;">
+                      ${romanIdx}
+                    </div>
+
+                    <div class="min-w-0">
+                      <div class="font-bold text-base leading-snug break-words" style="color: var(--text-primary);">
+                        ${escapeHTML(habit.name)}
+                      </div>
+                      ${habit.subtitle ? `
+                        <p class="text-xs italic mt-0.5 leading-relaxed break-words" style="color: var(--text-secondary);">
+                          ${escapeHTML(habit.subtitle)}
+                        </p>
+                      ` : ''}
+
+                      <div class="flex items-center gap-2.5 mt-2 flex-wrap">
+                        <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                              style="background: ${catMeta.bgTint}; color: ${habit.color}; border: 1px solid ${habit.color}44;">
+                          <span>${catMeta.symbol}</span>
+                          <span>${catMeta.name}</span>
+                        </span>
+                        <span class="text-xs italic tabular-nums" style="color: var(--text-muted);">
+                          ${doneCount}/${effTotal} days fulfilled
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="button" data-delete-habit="${habit.id}"
+                    class="opacity-70 sm:opacity-0 group-hover:opacity-100 focus:opacity-100 p-1.5 rounded-xl transition hover:text-[#E25B78]"
+                    style="color: var(--text-muted);"
+                    title="Remove ${escapeHTML(habit.name)}">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                  </button>
+                </div>
+              </td>
+
+              ${dayCellsHTML}
+
+              <td class="py-4 pl-3 pr-5 sm:pr-6 text-right">
+                <div class="inline-flex flex-col items-end">
+                  <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tabular-nums"
+                        style="${
+                          streak >= 5
+                            ? 'background: rgba(242, 201, 76, 0.18); color: var(--gold-primary); border: 1px solid var(--border-specular);'
+                            : streak >= 1
+                            ? 'background: rgba(255, 255, 255, 0.05); color: var(--text-primary); border: 1px solid var(--border-hairline);'
+                            : 'color: var(--text-muted);'
+                        }">
+                    <span style="color: var(--gold-primary);">✦</span>
+                    <span>${streak}d</span>
+                  </span>
+                  <span class="text-[11px] italic mt-1 tabular-nums" style="color: var(--text-secondary);">
+                    ${rowRate}% velocity
+                  </span>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      function renderVelocityChart(telemetry) {
+        const container = document.getElementById('velocityChartContainer');
+        const strip = document.getElementById('dailySummaryStrip');
+        const stats = telemetry.dailyStats;
+
+        const svgWidth = 680;
+        const svgHeight = 245;
+        const padLeft = 44;
+        const padRight = 20;
+        const padTop = 24;
+        const padBottom = 36;
+        const plotWidth = svgWidth - padLeft - padRight;
+        const plotHeight = svgHeight - padTop - padBottom;
+
+        const colWidth = plotWidth / 7;
+        const barWidth = 36;
+
+        const points = stats.map((ds, idx) => {
+          const x = padLeft + idx * colWidth + colWidth / 2;
+          const y = padTop + plotHeight - (ds.percent / 100) * plotHeight;
+          const barHeight = Math.max(5, (ds.percent / 100) * plotHeight);
+          const barY = padTop + plotHeight - barHeight;
+          return { x, y, barY, barHeight, ds, day: DAYS[idx], idx };
+        });
+
+        function buildSmoothPath(pts) {
+          if (pts.length === 0) return '';
+          let d = `M ${pts[0].x} ${pts[0].y}`;
+          for (let i = 0; i < pts.length - 1; i++) {
+            const p0 = pts[i];
+            const p1 = pts[i + 1];
+            const cpx1 = p0.x + (p1.x - p0.x) * 0.45;
+            const cpy1 = p0.y;
+            const cpx2 = p0.x + (p1.x - p0.x) * 0.55;
+            const cpy2 = p1.y;
+            d += ` C ${cpx1} ${cpy1}, ${cpx2} ${cpy2}, ${p1.x} ${p1.y}`;
+          }
+          return d;
+        }
+
+        const linePath = buildSmoothPath(points);
+        const target80Y = padTop + plotHeight - 0.8 * plotHeight;
+
+        const gridLevels = [0, 25, 50, 75, 100];
+        const gridLinesSVG = gridLevels.map(lvl => {
+          const y = padTop + plotHeight - (lvl / 100) * plotHeight;
+          return `
+            <g>
+              <line x1="${padLeft}" y1="${y}" x2="${svgWidth - padRight}" y2="${y}"
+                stroke="var(--chart-grid)" stroke-dasharray="${lvl === 0 ? '' : '3 3'}" stroke-width="1" />
+              <text x="${padLeft - 8}" y="${y + 4}" text-anchor="end"
+                fill="var(--text-muted)" class="text-[11px] italic tabular-nums">${lvl}%</text>
+            </g>
+          `;
+        }).join('');
+
+        const barsSVG = points.map(pt => {
+          const isToday = pt.idx === state.todayIndex;
+          const barFill = isToday
+            ? 'url(#activeGoldBarGrad)'
+            : pt.ds.percent >= 80
+            ? 'url(#sovereignWineGoldGrad)'
+            : 'url(#mutedMerlotGrad)';
+
+          return `
+            <g class="chart-day-group cursor-pointer" data-chart-day="${pt.idx}">
+              <rect x="${pt.x - colWidth / 2 + 3}" y="${padTop}" width="${colWidth - 6}" height="${plotHeight}"
+                rx="10" fill="rgba(242, 201, 76, 0)" class="hover:fill-[#F2C94C]/[0.06] transition-colors" />
+
+              <rect x="${pt.x - barWidth / 2}" y="${pt.barY}" width="${barWidth}" height="${pt.barHeight}"
+                rx="8" fill="${barFill}" stroke="rgba(242, 201, 76, 0.35)" stroke-width="0.8"
+                class="transition-all duration-300" />
+
+              <text x="${pt.x}" y="${svgHeight - 10}" text-anchor="middle"
+                fill="${isToday ? 'var(--gold-primary)' : 'var(--text-secondary)'}"
+                class="text-[11px] font-bold tracking-widest">
+                ${pt.day.short}
+              </text>
+            </g>
+          `;
+        }).join('');
+
+        const nodesSVG = points.map(pt => {
+          const isToday = pt.idx === state.todayIndex;
+          return `
+            <g class="pointer-events-none">
+              <circle cx="${pt.x}" cy="${pt.y}" r="${isToday ? 6.5 : 4.5}"
+                fill="#1D0717" stroke="#FFE27A" stroke-width="${isToday ? 3 : 2.2}" />
+              <text x="${pt.x}" y="${Math.max(14, pt.y - 10)}" text-anchor="middle"
+                fill="var(--text-primary)" class="text-[11px] font-bold tabular-nums">
+                ${pt.ds.percent}%
+              </text>
+            </g>
+          `;
+        }).join('');
+
+        container.innerHTML = `
+          <svg viewBox="0 0 ${svgWidth} ${svgHeight}" class="w-full h-full overflow-visible">
+            <defs>
+              <linearGradient id="activeGoldBarGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FFE27A" stop-opacity="0.98" />
+                <stop offset="55%" stop-color="#D4941C" stop-opacity="0.85" />
+                <stop offset="100%" stop-color="#6B1846" stop-opacity="0.7" />
+              </linearGradient>
+              <linearGradient id="sovereignWineGoldGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#F2C94C" stop-opacity="0.82" />
+                <stop offset="55%" stop-color="#B84B6E" stop-opacity="0.62" />
+                <stop offset="100%" stop-color="#4A1238" stop-opacity="0.45" />
+              </linearGradient>
+              <linearGradient id="mutedMerlotGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#CF76B2" stop-opacity="0.55" />
+                <stop offset="100%" stop-color="#4A1238" stop-opacity="0.25" />
+              </linearGradient>
+            </defs>
+
+            ${gridLinesSVG}
+
+            <line x1="${padLeft}" y1="${target80Y}" x2="${svgWidth - padRight}" y2="${target80Y}"
+              stroke="#F2C94C" stroke-width="1.4" stroke-dasharray="6 4" opacity="0.8" />
+
+            ${barsSVG}
+
+            <path d="${linePath}" fill="none" stroke="#FFE27A" stroke-width="2.6" stroke-linecap="round" />
+
+            ${nodesSVG}
+          </svg>
+        `;
+
+        strip.innerHTML = stats.map((ds, idx) => {
+          const isToday = idx === state.todayIndex;
+          return `
+            <button type="button" data-select-day="${idx}"
+              class="p-2 rounded-2xl border text-center transition"
+              style="${
+                isToday
+                  ? 'background: rgba(242, 201, 76, 0.16); border-color: var(--gold-primary);'
+                  : 'background: rgba(255, 255, 255, 0.02); border-color: var(--border-hairline);'
+              }">
+              <div class="text-[10px] font-bold tracking-widest" style="color: var(--text-secondary);">${DAYS[idx].short}</div>
+              <div class="text-xs font-bold tabular-nums mt-0.5" style="color: var(--text-primary);">
+                ${ds.completed}/${ds.effectiveTotal}
+              </div>
+              <div class="text-[10px] italic tabular-nums" style="color: ${ds.frozen > 0 ? '#DFC07A' : 'var(--gold-primary)'};">
+                ${ds.frozen > 0 ? `${ds.frozen} ❄` : `${ds.percent}%`}
+              </div>
+            </button>
+          `;
+        }).join('');
+
+        const tooltip = document.getElementById('chartTooltip');
+        container.querySelectorAll('.chart-day-group').forEach(group => {
+          group.addEventListener('mouseenter', () => {
+            const idx = Number(group.getAttribute('data-chart-day'));
+            const ds = stats[idx];
+            const day = DAYS[idx];
+            tooltip.innerHTML = `
+              <div class="font-bold text-xs flex items-center justify-between gap-4" style="color: #FFE27A;">
+                <span>${day.full}, ${day.date}</span>
+                <span class="tabular-nums">${ds.percent}%</span>
+              </div>
+              <div class="mt-1 text-[11px] italic space-y-0.5" style="color: #D5B88B;">
+                <div>✓ Fulfilled: ${ds.completed} of ${ds.effectiveTotal} active vows</div>
+                ${ds.frozen > 0 ? `<div style="color: #DFC07A;">❄ Freeze Shield: ${ds.frozen} rest protected</div>` : ''}
+              </div>
+            `;
+            tooltip.classList.remove('hidden');
+          });
+          group.addEventListener('mousemove', (e) => {
+            tooltip.style.left = `${Math.min(window.innerWidth - 230, e.clientX + 14)}px`;
+            tooltip.style.top = `${Math.max(12, e.clientY - 72)}px`;
+          });
+          group.addEventListener('mouseleave', () => {
+            tooltip.classList.add('hidden');
+          });
+          group.addEventListener('click', () => {
+            const idx = Number(group.getAttribute('data-chart-day'));
+            state.todayIndex = idx;
+            saveState(false);
+            renderAll();
+          });
+        });
+      }
+
+      function renderCategoryBreakdown(telemetry) {
+        const donutContainer = document.getElementById('categoryDonutContainer');
+        const listContainer = document.getElementById('categoryBreakdownList');
+
+        document.getElementById('totalCompletedPill').textContent =
+          `${telemetry.totalCompletedChecks} Seals`;
+        document.getElementById('freezeSummaryMetric').textContent =
+          `${telemetry.totalFrozenChecks} rest day${telemetry.totalFrozenChecks === 1 ? '' : 's'} shielded`;
+
+        const catKeys = Object.keys(CATEGORIES);
+        const categoryMetrics = catKeys.map(key => {
+          const catHabits = state.habits.filter(h => h.category === key);
+          let completed = 0;
+          let frozen = 0;
+          catHabits.forEach(h => {
+            h.days.forEach(v => {
+              if (v === 1) completed++;
+              else if (v === 'freeze') frozen++;
+            });
+          });
+          const totalPossible = catHabits.length * 7;
+          const effective = Math.max(0, totalPossible - frozen);
+          const rate = effective > 0 ? Math.round((completed / effective) * 100) : 0;
+          return {
+            key,
+            meta: CATEGORIES[key],
+            habitCount: catHabits.length,
+            completed,
+            frozen,
+            effective,
+            rate
+          };
+        });
+
+        const radius = 54;
+        const circumference = 2 * Math.PI * radius;
+        const totalCompleted = Math.max(1, categoryMetrics.reduce((acc, c) => acc + c.completed, 0));
+
+        let accumulatedFraction = 0;
+        const segmentsSVG = categoryMetrics.map(cm => {
+          if (cm.completed === 0) return '';
+          const fraction = cm.completed / totalCompleted;
+          const strokeLength = Math.max(0, fraction * circumference - 3.5);
+          const dashOffset = -accumulatedFraction * circumference;
+          accumulatedFraction += fraction;
+
+          return `
+            <circle cx="72" cy="72" r="${radius}"
+              fill="none"
+              stroke="${cm.meta.color}"
+              stroke-width="12"
+              stroke-dasharray="${strokeLength} ${circumference}"
+              stroke-dashoffset="${dashOffset}"
+              stroke-linecap="round"
+              transform="rotate(-90 72 72)"
+              class="transition-all duration-500" />
+          `;
+        }).join('');
+
+        donutContainer.innerHTML = `
+          <svg viewBox="0 0 144 144" class="w-full h-full">
+            <circle cx="72" cy="72" r="${radius}" fill="none" stroke="var(--chart-grid)" stroke-width="12" />
+            ${segmentsSVG}
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
+            <span class="font-bold text-2xl tabular-nums gold-gradient-text">
+              ${telemetry.weeklyRate}%
+            </span>
+            <span class="text-[10px] font-bold uppercase tracking-[0.18em]" style="color: var(--text-secondary);">
+              Velocity
+            </span>
+          </div>
+        `;
+
+        listContainer.innerHTML = categoryMetrics.map(cm => {
+          return `
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${cm.meta.color}"></span>
+                  <span class="font-bold" style="color: var(--text-primary);">${cm.meta.name}</span>
+                  <span class="italic" style="color: var(--text-muted);">
+                    (${cm.habitCount})
+                  </span>
+                </div>
+                <div class="flex items-center gap-2 tabular-nums">
+                  <span class="italic text-[11px]" style="color: var(--text-secondary);">${cm.completed}/${cm.effective}</span>
+                  <span class="font-bold w-9 text-right" style="color: var(--gold-primary);">${cm.rate}%</span>
+                </div>
+              </div>
+              <div class="w-full h-2 rounded-full overflow-hidden" style="background: rgba(242, 201, 76, 0.12);">
+                <div class="h-full rounded-full transition-all duration-500"
+                  style="width: ${cm.rate}%; background-color: ${cm.meta.color};"></div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function buildGoldEmblemSvgDataUrl(size = 512) {
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 128 128">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2E0923"/>
+              <stop offset="100%" stop-color="#130510"/>
+            </linearGradient>
+          </defs>
+          <rect width="128" height="128" rx="28" fill="url(#bg)" stroke="#F2C94C" stroke-width="4"/>
+          <circle cx="64" cy="64" r="26" fill="none" stroke="#FFE27A" stroke-width="5"/>
+          <circle cx="64" cy="64" r="44" fill="none" stroke="#F2C94C" stroke-width="2.5" stroke-dasharray="6 8"/>
+          <circle cx="64" cy="64" r="8" fill="#FFE27A"/>
+        </svg>`;
+        return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+      }
+
+      function getProductionManifestObject() {
+        return {
+          name: 'The Alchemical Habit Chronicle (Opus MCMLXXIV)',
+          short_name: 'Well Chronicle',
+          description: 'Dual-Engine Sovereign Sync Habit Chronicle across your Well folder and GitHub Cloud.',
+          start_url: './index.html',
+          display: 'standalone',
+          background_color: '#130510',
+          theme_color: '#130510',
+          orientation: 'any',
+          icons: [
+            {
+              src: buildGoldEmblemSvgDataUrl(192),
+              sizes: '192x192',
+              type: 'image/svg+xml',
+              purpose: 'any maskable'
+            },
+            {
+              src: buildGoldEmblemSvgDataUrl(512),
+              sizes: '512x512',
+              type: 'image/svg+xml',
+              purpose: 'any maskable'
+            }
+          ]
+        };
+      }
+
+      function injectDynamicManifest() {
+        try {
+          const manifestObj = getProductionManifestObject();
+          const blob = new Blob([JSON.stringify(manifestObj, null, 2)], { type: 'application/manifest+json' });
+          const url = URL.createObjectURL(blob);
+          const link = document.getElementById('dynamicManifestLink');
+          if (link) link.setAttribute('href', url);
+        } catch (e) {}
+      }
+
+      function getProductionServiceWorkerCode() {
+        return `/* OPUS MCMLXXIV — Offline Cache-First Service Worker + Network-First GitHub API */
+const CACHE_NAME = 'alchemical-chronicle-v4';
+const APP_SHELL = ['./', './index.html', './manifest.json'];
+
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL).catch(() => {}))
+  );
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
+    ).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', (event) => {
+  const url = new URL(event.request.url);
+  if (url.hostname === 'api.github.com') {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+  event.respondWith(
+    caches.match(event.request).then((cached) => {
+      const networkFetch = fetch(event.request).then((response) => {
+        if (response && response.status === 200 && event.request.method === 'GET') {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => cached);
+      return cached || networkFetch;
+    })
+  );
+});
+`;
+      }
+
+      function downloadTextFile(filename, content, mimeType = 'application/json') {
+        const blob = new Blob([content], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      function adjustHexBrightness(hex, amt) {
+        let usePound = false;
+        let col = hex;
+        if (col[0] === '#') {
+          col = col.slice(1);
+          usePound = true;
+        }
+        const num = parseInt(col, 16);
+        let r = (num >> 16) + amt;
+        if (r > 255) r = 255;
+        else if (r < 0) r = 0;
+        let b = ((num >> 8) & 0x00FF) + amt;
+        if (b > 255) b = 255;
+        else if (b < 0) b = 0;
+        let g = (num & 0x0000FF) + amt;
+        if (g > 255) g = 255;
+        else if (g < 0) g = 0;
+        return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16).padStart(6, '0');
+      }
+
+      function escapeHTML(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function showToast(message, options = {}) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'pointer-events-auto flex items-center justify-between gap-3 px-4 py-3 rounded-2xl text-xs font-semibold shadow-2xl transition-all duration-200';
+        toast.style.background = 'rgba(28, 7, 23, 0.96)';
+        toast.style.color = '#FAF1E2';
+        toast.style.border = '1px solid rgba(242, 201, 76, 0.5)';
+
+        let html = `<span class="italic">${escapeHTML(message)}</span>`;
+        if (options.undoCallback) {
+          html += `
+            <button type="button" class="toast-undo-btn ios-gold-cta px-3 py-1 rounded-xl text-xs font-bold shrink-0">
+              Restore
+            </button>
+          `;
+        }
+        toast.innerHTML = html;
+        container.appendChild(toast);
+
+        const undoBtn = toast.querySelector('.toast-undo-btn');
+        if (undoBtn && options.undoCallback) {
+          undoBtn.addEventListener('click', () => {
+            options.undoCallback();
+            toast.remove();
+          });
+        }
+
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 220);
+          }
+        }, 4200);
+      }
+
+      function renderAll() {
+        const telemetry = computeOverallTelemetry();
+        renderKPICards(telemetry);
+        renderHabitGrid(telemetry);
+        renderVelocityChart(telemetry);
+        renderCategoryBreakdown(telemetry);
+        updateSyncStatusUI();
+      }
+
+      function toggleHabitCell(habitId, dayIdx, forceFreezeMode = false) {
+        const habit = state.habits.find(h => h.id === habitId);
+        if (!habit) return;
+
+        const current = habit.days[dayIdx];
+        if (forceFreezeMode || state.freezeBrushActive) {
+          habit.days[dayIdx] = current === 'freeze' ? 0 : 'freeze';
+          playTactileSound(habit.days[dayIdx] === 'freeze' ? 'freeze' : 'uncheck');
+        } else {
+          habit.days[dayIdx] = current === 1 ? 0 : 1;
+          if (habit.days[dayIdx] === 1) {
+            const dayStatsAfter = computeDayStats(dayIdx, state.habits);
+            if (dayStatsAfter.percent === 100) {
+              playTactileSound('astound');
+            } else {
+              playTactileSound('check', dayStatsAfter.completed);
+            }
+          } else {
+            playTactileSound('uncheck');
+          }
+        }
+
+        const nowTs = Date.now();
+        const cellKey = `${habitId}_${dayIdx}`;
+        state.cellTimestamps[cellKey] = nowTs;
+        state.cellOrigins[cellKey] = state.deviceOrigin;
+        habit.updatedAt = nowTs;
+        lastAnimatedCellKey = cellKey;
+
+        logSyncEvent(`Cell [${habit.name.slice(0, 22)}... • ${DAYS[dayIdx].short}] → ${habit.days[dayIdx]} (@${nowTs} via ${state.deviceOrigin})`, 'info');
+        saveState(true);
+        renderAll();
+      }
+
+      function initThemeAndSound() {
+        const savedTheme = localStorage.getItem(THEME_KEY) || 'dark';
+        const root = document.documentElement;
+        const label = document.getElementById('themeToggleLabel');
+        if (savedTheme === 'light') {
+          root.classList.remove('dark');
+          label.textContent = 'Velvet Wine Dark';
+        } else {
+          root.classList.add('dark');
+          label.textContent = 'Parchment Light';
+        }
+        updateSoundUI();
+      }
+
+      function updateSoundUI() {
+        const onIcon = document.getElementById('soundOnIcon');
+        const offIcon = document.getElementById('soundOffIcon');
+        const label = document.getElementById('soundToggleLabel');
+        if (soundEnabled) {
+          onIcon.classList.remove('hidden');
+          offIcon.classList.add('hidden');
+          label.textContent = 'Acoustics: On';
+        } else {
+          onIcon.classList.add('hidden');
+          offIcon.classList.remove('hidden');
+          label.textContent = 'Acoustics: Muted';
+        }
+      }
+
+      function toggleTheme() {
+        const root = document.documentElement;
+        const isDark = root.classList.contains('dark');
+        const label = document.getElementById('themeToggleLabel');
+        if (isDark) {
+          root.classList.remove('dark');
+          localStorage.setItem(THEME_KEY, 'light');
+          label.textContent = 'Velvet Wine Dark';
+        } else {
+          root.classList.add('dark');
+          localStorage.setItem(THEME_KEY, 'dark');
+          label.textContent = 'Parchment Light';
+        }
+      }
+
+      function updateColorSwatches(selectedHex) {
+        state.selectedColor = selectedHex;
+        document.querySelectorAll('.color-swatch').forEach(btn => {
+          const c = btn.getAttribute('data-color');
+          if (c === selectedHex) {
+            btn.className = 'color-swatch w-7 h-7 rounded-full ring-2 ring-offset-2 ring-offset-[#1D0717] ring-[#FFE27A] transition transform scale-105';
+          } else {
+            btn.className = 'color-swatch w-7 h-7 rounded-full opacity-70 hover:opacity-100 transition';
+          }
+          btn.style.backgroundColor = c;
+        });
+      }
+
+      function populateGithubModalFields() {
+        document.getElementById('ghOwnerInput').value = ghConfig.owner || '';
+        document.getElementById('ghRepoInput').value = ghConfig.repo || '';
+        document.getElementById('ghBranchInput').value = ghConfig.branch || 'main';
+        document.getElementById('ghPathInput').value = ghConfig.path || 'Well/chronicle-ledger.json';
+        document.getElementById('ghGistIdInput').value = ghConfig.gistId || '';
+        document.getElementById('ghTokenInput').value = ghConfig.token || '';
+        switchGithubModeUI(ghConfig.mode || 'repo');
+        updateShaBadge();
+      }
+
+      function switchGithubModeUI(mode) {
+        ghConfig.mode = mode;
+        const repoFields = document.getElementById('ghRepoFields');
+        const gistFields = document.getElementById('ghGistFields');
+        const repoBtn = document.getElementById('ghModeRepoBtn');
+        const gistBtn = document.getElementById('ghModeGistBtn');
+
+        if (mode === 'gist') {
+          repoFields.classList.add('hidden');
+          gistFields.classList.remove('hidden');
+          gistBtn.style.background = 'linear-gradient(135deg, #F2C94C 0%, #D4941C 100%)';
+          gistBtn.style.color = '#1A0515';
+          repoBtn.style.background = 'transparent';
+          repoBtn.style.color = 'var(--text-secondary)';
+        } else {
+          repoFields.classList.remove('hidden');
+          gistFields.classList.add('hidden');
+          repoBtn.style.background = 'linear-gradient(135deg, #F2C94C 0%, #D4941C 100%)';
+          repoBtn.style.color = '#1A0515';
+          gistBtn.style.background = 'transparent';
+          gistBtn.style.color = 'var(--text-secondary)';
+        }
+      }
+
+      function bindEvents() {
+        document.getElementById('themeToggleBtn').addEventListener('click', toggleTheme);
+
+        document.getElementById('soundToggleBtn').addEventListener('click', () => {
+          soundEnabled = !soundEnabled;
+          localStorage.setItem(SOUND_KEY, soundEnabled ? 'on' : 'off');
+          updateSoundUI();
+          if (soundEnabled) playTactileSound('check', 2);
+        });
+
+        const deviceSelect = document.getElementById('headerDeviceSelect');
+        deviceSelect.value = state.deviceOrigin || 'Lenovo Laptop';
+        deviceSelect.addEventListener('change', () => {
+          state.deviceOrigin = deviceSelect.value;
+          saveState(false);
+          showToast(`Active node set to ${state.deviceOrigin}`);
+        });
+
+        document.getElementById('verifyWellHandleBtn').addEventListener('click', verifyPendingWellHandle);
+        document.getElementById('dismissWellBannerBtn').addEventListener('click', () => {
+          document.getElementById('wellPermissionBanner').classList.add('hidden');
+        });
+
+        // Quick Sync Now Button (runs both Well Folder + GitHub Cloud)
+        document.getElementById('quickSyncNowBtn').addEventListener('click', async () => {
+          let syncedAny = false;
+          if (pendingWellFileHandle && !boundWellFileHandle) {
+            await verifyPendingWellHandle();
+            syncedAny = true;
+          }
+          if (boundWellFileHandle) {
+            await pullAndMergeFromBoundWellFile(true);
+            await writeToBoundWellFile();
+            syncedAny = true;
+          }
+          if (isGithubConfigured()) {
+            await pullFromGithubCloud(true);
+            await pushToGithubCloud(true);
+            syncedAny = true;
+          }
+          if (syncedAny) {
+            playTactileSound('sync');
+            showToast('Dual-Engine CRDT Merge & Sync completed.');
+          } else {
+            openSyncVaultModal();
+            showToast('Bind your Well folder file or GitHub token to enable live sync.');
+          }
+        });
+
+        // Sync & PWA Vault Modal open/close
+        const syncModal = document.getElementById('syncVaultModal');
+        function openSyncVaultModal() {
+          populateGithubModalFields();
+          renderSyncLogBox();
+          syncModal.classList.remove('hidden');
+        }
+        document.getElementById('openSyncVaultBtn').addEventListener('click', openSyncVaultModal);
+        document.getElementById('headerSyncStatusPill').addEventListener('click', openSyncVaultModal);
+        document.getElementById('closeSyncVaultBtn').addEventListener('click', () => {
+          syncModal.classList.add('hidden');
+        });
+        syncModal.addEventListener('click', (e) => {
+          if (e.target === syncModal) syncModal.classList.add('hidden');
+        });
+
+        // Vault Modal Tabs
+        document.querySelectorAll('.vault-tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tab = btn.getAttribute('data-vault-tab');
+            document.querySelectorAll('.vault-tab-btn').forEach(b => {
+              if (b.getAttribute('data-vault-tab') === tab) {
+                b.style.background = 'linear-gradient(135deg, #F2C94C 0%, #D4941C 100%)';
+                b.style.color = '#1A0515';
+              } else {
+                b.style.background = '';
+                b.style.color = '';
+              }
+            });
+            document.getElementById('vaultTabWell').classList.toggle('hidden', tab !== 'well');
+            document.getElementById('vaultTabGithub').classList.toggle('hidden', tab !== 'github');
+            document.getElementById('vaultTabPwa').classList.toggle('hidden', tab !== 'pwa');
+            document.getElementById('vaultTabLog').classList.toggle('hidden', tab !== 'log');
+          });
+        });
+
+        // Tab I: Well Folder File System Access API buttons
+        document.getElementById('bindExistingWellFileBtn').addEventListener('click', bindExistingWellFile);
+        document.getElementById('createNewWellFileBtn').addEventListener('click', createNewWellFile);
+        document.getElementById('readMergeWellFileBtn').addEventListener('click', () => pullAndMergeFromBoundWellFile(false));
+        document.getElementById('writeWellFileNowBtn').addEventListener('click', async () => {
+          if (!boundWellFileHandle) return showToast('Bind a Well folder file first.');
+          await writeToBoundWellFile();
+          playTactileSound('sync');
+          showToast(`Saved ledger to Well/${boundWellFileHandle.name}`);
+        });
+        document.getElementById('unbindWellFileBtn').addEventListener('click', async () => {
+          boundWellFileHandle = null;
+          pendingWellFileHandle = null;
+          await clearHandleFromIDB();
+          updateSyncStatusUI();
+          showToast('Unlinked local Well folder file handle.');
+        });
+
+        // Manual JSON Export / Import & CRDT Merge
+        document.getElementById('exportLedgerJsonBtn').addEventListener('click', () => {
+          const json = JSON.stringify(getSerializableLedger(state), null, 2);
+          downloadTextFile('chronicle-ledger.json', json, 'application/json');
+          showToast('Exported chronicle-ledger.json');
+        });
+        document.getElementById('importLedgerJsonInput').addEventListener('change', async (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          try {
+            const text = await file.text();
+            const imported = JSON.parse(text);
+            const { mergedLedger, remoteCellsWon, habitsAddedFromRemote } = mergeLedgers(state, imported);
+            state = mergedLedger;
+            saveState(true);
+            renderAll();
+            playTactileSound('sync');
+            showToast(`CRDT-Merged ${file.name} (${remoteCellsWon} cell updates, ${habitsAddedFromRemote} new vows).`);
+          } catch (err) {
+            showToast(`Invalid JSON ledger: ${err.message}`);
+          }
+          e.target.value = '';
+        });
+
+        // Tab II: GitHub Cloud API controls
+        document.getElementById('ghModeRepoBtn').addEventListener('click', () => switchGithubModeUI('repo'));
+        document.getElementById('ghModeGistBtn').addEventListener('click', () => switchGithubModeUI('gist'));
+        document.getElementById('autoCreateGistBtn').addEventListener('click', autoCreateSecretGist);
+
+        document.getElementById('saveGithubConfigBtn').addEventListener('click', async () => {
+          ghConfig.owner = document.getElementById('ghOwnerInput').value.trim();
+          ghConfig.repo = document.getElementById('ghRepoInput').value.trim();
+          ghConfig.branch = document.getElementById('ghBranchInput').value.trim() || 'main';
+          ghConfig.path = document.getElementById('ghPathInput').value.trim() || 'Well/chronicle-ledger.json';
+          ghConfig.gistId = document.getElementById('ghGistIdInput').value.trim();
+          ghConfig.token = document.getElementById('ghTokenInput').value.trim();
+          saveGithubConfigToStorage();
+          updateSyncStatusUI();
+          const ok = await pullFromGithubCloud(false);
+          if (ok) {
+            await pushToGithubCloud(true);
+            playTactileSound('sync');
+          }
+        });
+
+        document.getElementById('clearGithubConfigBtn').addEventListener('click', () => {
+          ghConfig = { mode: 'repo', owner: '', repo: '', branch: 'main', path: 'Well/chronicle-ledger.json', gistId: '', token: '', lastSha: '' };
+          saveGithubConfigToStorage();
+          populateGithubModalFields();
+          updateSyncStatusUI();
+          showToast('Cleared saved GitHub configuration.');
+        });
+
+        document.getElementById('pullGithubNowBtn').addEventListener('click', () => pullFromGithubCloud(false));
+        document.getElementById('pushGithubNowBtn').addEventListener('click', () => pushToGithubCloud(false));
+
+        // Tab III: PWA Kit Downloads
+        document.getElementById('downloadManifestBtn').addEventListener('click', () => {
+          const content = JSON.stringify(getProductionManifestObject(), null, 2);
+          downloadTextFile('manifest.json', content, 'application/manifest+json');
+          showToast('Downloaded manifest.json');
+        });
+        document.getElementById('downloadSwBtn').addEventListener('click', () => {
+          downloadTextFile('sw.js', getProductionServiceWorkerCode(), 'application/javascript');
+          showToast('Downloaded sw.js offline service worker');
+        });
+        document.getElementById('copyDeployGuideBtn').addEventListener('click', () => {
+          const guide = [
+            'OPUS MCMLXXIV — 4-DEVICE SOVEREIGN SYNC BLUEPRINT',
+            '1. Push index.html, manifest.json, and sw.js to a GitHub repository and enable GitHub Pages (HTTPS).',
+            '2. On Lenovo & ASUS Laptops (Windows): Open your GitHub Pages URL -> Install App -> Open Sync & PWA Vault -> Bind Google Drive/Well/chronicle-ledger.json and save your GitHub Token.',
+            '3. On Samsung Phone & Samsung Tablet (Android): Open the URL in Chrome/Samsung Internet -> Add to Home Screen -> Bind Well/chronicle-ledger.json (synced by DriveSync Pro) and save your GitHub Token.'
+          ].join('\n');
+          const ta = document.createElement('textarea');
+          ta.value = guide;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast('Copied 4-Device Setup Blueprint to clipboard.');
+        });
+
+        document.getElementById('clearSyncLogBtn').addEventListener('click', () => {
+          syncLogs = [];
+          renderSyncLogBox();
+        });
+
+        // Clear Week Checks & Restore Defaults
+        document.getElementById('clearWeekBtn').addEventListener('click', () => {
+          const nowTs = Date.now();
+          state.habits.forEach(h => {
+            h.days = [0, 0, 0, 0, 0, 0, 0];
+            h.updatedAt = nowTs;
+            for (let d = 0; d < 7; d++) {
+              state.cellTimestamps[`${h.id}_${d}`] = nowTs;
+              state.cellOrigins[`${h.id}_${d}`] = state.deviceOrigin;
+            }
+          });
+          playTactileSound('uncheck');
+          saveState(true);
+          renderAll();
+          showToast('All weekly checks cleared across your ledger.');
+        });
+
+        document.getElementById('resetDemoBtn').addEventListener('click', () => {
+          const fresh = getDefaultState();
+          const nowTs = Date.now();
+          fresh.deviceOrigin = state.deviceOrigin;
+          fresh.lastModifiedAt = nowTs;
+          Object.keys(fresh.cellTimestamps).forEach(k => {
+            fresh.cellTimestamps[k] = nowTs;
+          });
+          state = fresh;
+          playTactileSound('astound');
+          saveState(true);
+          renderAll();
+          showToast('Restored your VI core daily vows and sample weekly streak.');
+        });
+
+        // Add Vow Drawer
+        const drawer = document.getElementById('addHabitDrawer');
+        const nameInput = document.getElementById('habitNameInput');
+        function openDrawer() {
+          drawer.classList.remove('hidden');
+          nameInput.focus();
+        }
+        document.getElementById('openAddHabitBtn').addEventListener('click', openDrawer);
+        document.getElementById('footerAddHabitBtn').addEventListener('click', openDrawer);
+        document.getElementById('closeAddHabitBtn').addEventListener('click', () => {
+          drawer.classList.add('hidden');
+        });
+
+        const catSelect = document.getElementById('habitCategoryInput');
+        catSelect.addEventListener('change', () => {
+          const cat = CATEGORIES[catSelect.value];
+          if (cat) updateColorSwatches(cat.color);
+        });
+
+        document.querySelectorAll('.color-swatch').forEach(btn => {
+          btn.addEventListener('click', () => {
+            updateColorSwatches(btn.getAttribute('data-color'));
+          });
+        });
+
+        document.querySelectorAll('.preset-pill').forEach(pill => {
+          pill.addEventListener('click', () => {
+            nameInput.value = pill.getAttribute('data-preset-name');
+            catSelect.value = pill.getAttribute('data-preset-cat');
+            updateColorSwatches(pill.getAttribute('data-preset-color'));
+            nameInput.focus();
+          });
+        });
+
+        document.getElementById('newHabitForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const title = nameInput.value.trim();
+          if (!title) return;
+          const category = catSelect.value;
+          const nowTs = Date.now();
+          const newId = 'h-' + nowTs;
+          const newHabit = {
+            id: newId,
+            name: title,
+            subtitle: 'Personal daily vow inscribed in the chronicle',
+            category,
+            color: state.selectedColor || CATEGORIES[category].color,
+            days: [0, 0, 0, 0, 0, 0, 0],
+            updatedAt: nowTs
+          };
+          for (let d = 0; d < 7; d++) {
+            state.cellTimestamps[`${newId}_${d}`] = nowTs;
+            state.cellOrigins[`${newId}_${d}`] = state.deviceOrigin;
+          }
+          state.habits.push(newHabit);
+          nameInput.value = '';
+          drawer.classList.add('hidden');
+          playTactileSound('check', 4);
+          saveState(true);
+          renderAll();
+          showToast(`Inscribed "${newHabit.name}" into your ledger.`);
+        });
+
+        // Freeze Brush Toggle
+        const freezeBtn = document.getElementById('freezeModeBtn');
+        const freezeLabel = document.getElementById('freezeModeLabel');
+        freezeBtn.addEventListener('click', () => {
+          state.freezeBrushActive = !state.freezeBrushActive;
+          if (state.freezeBrushActive) {
+            freezeBtn.style.background = 'rgba(242, 201, 76, 0.24)';
+            freezeBtn.style.borderColor = '#FFE27A';
+            freezeLabel.textContent = 'Freeze Brush: ACTIVE ❄';
+            playTactileSound('freeze');
+          } else {
+            freezeBtn.style.background = '';
+            freezeBtn.style.borderColor = '';
+            freezeLabel.textContent = 'Freeze Brush: Off';
+          }
+        });
+
+        // Category Filter Bar
+        document.getElementById('categoryFilterBar').addEventListener('click', (e) => {
+          const btn = e.target.closest('.cat-filter-btn');
+          if (!btn) return;
+          state.activeCategoryFilter = btn.getAttribute('data-filter');
+          document.querySelectorAll('.cat-filter-btn').forEach(b => {
+            if (b.getAttribute('data-filter') === state.activeCategoryFilter) {
+              b.style.background = 'linear-gradient(135deg, #F2C94C 0%, #D4941C 100%)';
+              b.style.color = '#1A0515';
+            } else {
+              b.style.background = 'transparent';
+              b.style.color = 'var(--text-secondary)';
+            }
+          });
+          saveState(false);
+          renderAll();
+        });
+
+        // Delegated Matrix & Day Selector Clicks
+        document.addEventListener('click', (e) => {
+          const cellBtn = e.target.closest('.habit-cell');
+          if (cellBtn) {
+            const habitId = cellBtn.getAttribute('data-habit-id');
+            const dayIdx = Number(cellBtn.getAttribute('data-day-idx'));
+            toggleHabitCell(habitId, dayIdx, e.shiftKey);
+            return;
+          }
+
+          const deleteBtn = e.target.closest('[data-delete-habit]');
+          if (deleteBtn) {
+            const habitId = deleteBtn.getAttribute('data-delete-habit');
+            const idx = state.habits.findIndex(h => h.id === habitId);
+            if (idx !== -1) {
+              const removed = state.habits.splice(idx, 1)[0];
+              const delTs = Date.now();
+              state.deletedHabits[habitId] = delTs;
+              lastDeletedHabit = { habit: removed, index: idx };
+              playTactileSound('uncheck');
+              saveState(true);
+              renderAll();
+              showToast(`Removed "${removed.name}"`, {
+                undoCallback: () => {
+                  if (lastDeletedHabit) {
+                    delete state.deletedHabits[lastDeletedHabit.habit.id];
+                    lastDeletedHabit.habit.updatedAt = Date.now();
+                    state.habits.splice(lastDeletedHabit.index, 0, lastDeletedHabit.habit);
+                    lastDeletedHabit = null;
+                    saveState(true);
+                    renderAll();
+                  }
+                }
+              });
+            }
+            return;
+          }
+
+          const daySelectBtn = e.target.closest('[data-select-day]');
+          if (daySelectBtn) {
+            const dayIdx = Number(daySelectBtn.getAttribute('data-select-day'));
+            state.todayIndex = dayIdx;
+            saveState(false);
+            renderAll();
+          }
+        });
+
+        // Right-click on any cell toggles Freeze Rest Shield
+        document.getElementById('habitGridBody').addEventListener('contextmenu', (e) => {
+          const cellBtn = e.target.closest('.habit-cell');
+          if (!cellBtn) return;
+          e.preventDefault();
+          const habitId = cellBtn.getAttribute('data-habit-id');
+          const dayIdx = Number(cellBtn.getAttribute('data-day-idx'));
+          toggleHabitCell(habitId, dayIdx, true);
+        });
+
+        // Auto-Sync on Window Focus / Visibility Change
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') {
+            if (boundWellFileHandle) pullAndMergeFromBoundWellFile(true);
+            if (isGithubConfigured()) pullFromGithubCloud(true);
+          }
+        });
+      }
+
+      injectDynamicManifest();
+      initThemeAndSound();
+      bindEvents();
+      renderAll();
+      restoreSavedWellFileHandle();
+      if (isGithubConfigured()) {
+        pullFromGithubCloud(true);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* OPUS MCMLXXIV — Offline Cache-First Service Worker + Network-First GitHub API */
-const CACHE_NAME = 'alchemical-chronicle-v4';
+const CACHE_NAME = 'alchemical-chronicle-v5';
 const APP_SHELL = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', (event) => {
